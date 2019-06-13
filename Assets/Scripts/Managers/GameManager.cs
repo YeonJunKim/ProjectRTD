@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     const int SPAWN_AMOUNT_PER_WAVE = 20;
     int countSpawn;
 
-    const float TIME_BETWEEN_WAVES = 21f;
+    const float TIME_BETWEEN_WAVES = 1f;
     float nextWaveTime;
 
     bool spawnOn;

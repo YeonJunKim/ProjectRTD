@@ -68,6 +68,7 @@ public class PlayerControlManager : MonoBehaviour
                     Vector3 pos = prePlacer.transform.position;
                     pos.y -= 0.5f;     // little twick back becuase of miss match
                     tower.transform.position = pos;
+                    tower.transform.Rotate(0, 180, 0);
 
                     prePlacer.SetActive(false);
                     prePlacer.GetComponent<PrePlacer>().Init();
@@ -169,6 +170,7 @@ public class PlayerControlManager : MonoBehaviour
         chances.Add(TowerType.Dragon, 50);
         chances.Add(TowerType.Penguin, 50);
         chances.Add(TowerType.Mushroom, 50);
+        chances.Add(TowerType.Momo, 50);
 
         int sum = 0;
         foreach(var chance in chances)

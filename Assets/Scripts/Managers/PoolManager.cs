@@ -24,6 +24,7 @@ public enum TowerType
     Dragon,
     Penguin,
     Mushroom,
+    Momo,
 };
 
 public enum ProjectileType
@@ -32,6 +33,7 @@ public enum ProjectileType
     Flame,
     Bomb,
     Ice,
+    Laser,
 };
 
 

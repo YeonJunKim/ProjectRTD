@@ -2429,7 +2429,7 @@ PrefabInstance:
         type: 3}
       propertyPath: background
       value: 
-      objectReference: {fileID: 238299117791993027}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 024fc91bf3fde9d4999b99e4953f9e60, type: 3}
 --- !u!4 &238299117121577911 stripped
@@ -2441,12 +2441,6 @@ Transform:
 --- !u!1 &238299116854395170 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4662221960234257239, guid: 024fc91bf3fde9d4999b99e4953f9e60,
-    type: 3}
-  m_PrefabInstance: {fileID: 4899091636734954101}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &238299117791993027 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4662221960370673334, guid: 024fc91bf3fde9d4999b99e4953f9e60,
     type: 3}
   m_PrefabInstance: {fileID: 4899091636734954101}
   m_PrefabAsset: {fileID: 0}

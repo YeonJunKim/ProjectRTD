@@ -10,6 +10,7 @@ public class Tower_Dragon : Tower
     {
         base.Start();
         flamePartical.Stop();
+        flamePartical.gameObject.SetActive(false);
     }
 
 
@@ -20,11 +21,13 @@ public class Tower_Dragon : Tower
         Enemy target = radarSystem.GetTarget();
         if (target != null)
         {
+            flamePartical.gameObject.SetActive(true);
             flamePartical.Play();
         }
         else
         {
             flamePartical.Stop();
+            flamePartical.gameObject.SetActive(false);
         }
     }
 
