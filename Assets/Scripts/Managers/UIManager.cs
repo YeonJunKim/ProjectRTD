@@ -15,7 +15,7 @@ public class UIManager : MonoBehaviour
 
     public Image[] playerLife;
     public Text playerMoney;
-
+    public Text stageLevel;
 
     private void Awake()
     {
@@ -66,12 +66,7 @@ public class UIManager : MonoBehaviour
         }
 
         int index = (int)(life * 10 / 2.5f);
-        float fill = life % 0.25f;
-
-        if (Mathf.Approximately(fill, 0))
-            fill = 1;
-        else
-            fill = fill / 0.25f;
+        float fill = (life % 0.25f) / 0.25f;
 
         for (int i = 0; i < 4; i++)
         {
@@ -88,5 +83,10 @@ public class UIManager : MonoBehaviour
                 playerLife[i].fillAmount = 0;
             }
         }
+    }
+
+    public void SetStageLevel(int level)
+    {
+        stageLevel.text = level.ToString();
     }
 }

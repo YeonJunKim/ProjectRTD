@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     const int SPAWN_AMOUNT_PER_WAVE = 20;
     int countSpawn;
 
-    const float TIME_BETWEEN_WAVES = 21f;
+    const float TIME_BETWEEN_WAVES = 41f;
     float nextWaveTime;
     int nextEnemyType;
 
@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour
         UIManager.S.SetMoney(playerMoney);
 
         stageLevel = 1;
+        UIManager.S.SetStageLevel(stageLevel);
         increaseStageLevel = false;
     }
 
@@ -96,10 +97,14 @@ public class GameManager : MonoBehaviour
 
     void IncreaseStageLevel()
     {
+        // for not to increase level at start
         if (increaseStageLevel == false)
             increaseStageLevel = true;
         else
+        {
             stageLevel++;
+            UIManager.S.SetStageLevel(stageLevel);
+        }
     }
 
     public void IncreaseMoneyByStageLevel()
