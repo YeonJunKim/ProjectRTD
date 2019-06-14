@@ -258,7 +258,7 @@ public class PlayerControlManager : MonoBehaviour
     {
         Dictionary<TowerType, int> chances = new Dictionary<TowerType, int>();
 
-        chances.Add(TowerType.Chick_1, 5000);
+        chances.Add(TowerType.Chick_1, 50);
         chances.Add(TowerType.LittleBoar_1, 50);
         chances.Add(TowerType.Dragon_1, 50);
         chances.Add(TowerType.Penguin_1, 50);

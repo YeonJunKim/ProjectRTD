@@ -30,7 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7759961242375361850}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3293843302336610809
 MonoBehaviour:
@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 7421368188568966836}
   - component: {fileID: 5694947468548400274}
   m_Layer: 10
-  m_Name: Mushroom
+  m_Name: Mushroom_1
   m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -87,8 +87,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4660843791178152648}
   - {fileID: 4246224052712356853}
+  - {fileID: 4660843791178152648}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -174,7 +174,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 454834, guid: edbd40695eb40824c9487bb7887c420e, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 454834, guid: edbd40695eb40824c9487bb7887c420e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -190,15 +190,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 454834, guid: edbd40695eb40824c9487bb7887c420e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 454834, guid: edbd40695eb40824c9487bb7887c420e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 454834, guid: edbd40695eb40824c9487bb7887c420e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 13777356, guid: edbd40695eb40824c9487bb7887c420e, type: 3}
       propertyPath: m_Bones.Array.data[0]

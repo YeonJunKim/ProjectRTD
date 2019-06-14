@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 4876589189195330618}
   - component: {fileID: 8975436084745835448}
   m_Layer: 10
-  m_Name: Momo
+  m_Name: Momo_1
   m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -546,6 +546,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 10834424, guid: b7e5be8cde65c7c42915ee6e2273d19b, type: 3}
+    - {fileID: 8289228, guid: b7e5be8cde65c7c42915ee6e2273d19b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b7e5be8cde65c7c42915ee6e2273d19b, type: 3}
 --- !u!4 &1580178970 stripped
 Transform:
@@ -674,7 +675,8 @@ PrefabInstance:
       propertyPath: m_RootBone
       value: 
       objectReference: {fileID: 8245366631754389633}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6590648, guid: 8ccf10cec3b3de5478c3a78d804ffa82, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8ccf10cec3b3de5478c3a78d804ffa82, type: 3}
 --- !u!4 &8245366631754457233 stripped
 Transform:

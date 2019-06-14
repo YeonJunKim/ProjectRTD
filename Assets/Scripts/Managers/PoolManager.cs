@@ -30,11 +30,11 @@ public enum TowerType
 
     // level 2
     Chick_2,
-    //LittleBoar_2,
-    //Dragon_2,
-    //Penguin_2,
-    //Mushroom_2,
-    //Momo_2,
+    LittleBoar_2,
+    Dragon_2,
+    Penguin_2,
+    Mushroom_2,
+    Momo_2,
 };
 
 public enum ProjectileType
@@ -43,7 +43,8 @@ public enum ProjectileType
     Flame,
     Bomb,
     Ice,
-    Laser,
+    Laser_1,
+    Laser_2,
 };
 
 

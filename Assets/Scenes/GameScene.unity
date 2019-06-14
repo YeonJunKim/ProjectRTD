@@ -674,12 +674,18 @@ MonoBehaviour:
   - {fileID: 6466798889857207475, guid: 314b30861b1cf5e459f3db9c67084c6e, type: 3}
   - {fileID: 4576269367861330943, guid: 107ea482e4772e142bc208b89df6027f, type: 3}
   - {fileID: 5724085372721746573, guid: a10c4a8b12fcc824baf6af855faf2a12, type: 3}
+  - {fileID: 2616885408798654227, guid: 29b5200b8e9dfa640a9c972b22719eea, type: 3}
+  - {fileID: 2190001817581342783, guid: 5cbdbf66cd8ca6545b350204f7b5adb9, type: 3}
+  - {fileID: 4665858323920571874, guid: ff729b76f92b3204e924137e5b38b13a, type: 3}
+  - {fileID: 5999449574549395976, guid: 8d97a06ff1a888c48afeefb4897f7db1, type: 3}
+  - {fileID: 9135675088013450994, guid: 667b5588a7cc2f348a767d85aadeddd9, type: 3}
   projectilePrefabs:
   - {fileID: 8580606040232312991, guid: 86e02ccab90d286428b853e4168accaa, type: 3}
   - {fileID: 5376749671823902023, guid: 027a2ffefa171584dbbc02afb43c1656, type: 3}
   - {fileID: 2061219851524093779, guid: 23009a03d3f936349b3ac3455ce5d991, type: 3}
   - {fileID: 8580606040232312991, guid: a8a33c437ea9ebe4285f39901603a356, type: 3}
   - {fileID: 360557433, guid: a57994e5b6fea22438094532090a7978, type: 3}
+  - {fileID: 4055021692388459502, guid: f7991b53894cd0740af43ccb156d0df3, type: 3}
 --- !u!4 &417570723
 Transform:
   m_ObjectHideFlags: 0

@@ -27,10 +27,11 @@ public class GameManager : MonoBehaviour
     int playerMoney;
     public static int MONEY_FOR_TOWER_DRAW = 50;
     public static int MONEY_FOR_TOWER_UPGRADE = 100;
+    const int moneyByStageLevel = 5;
+    const int startMoney = 9999;
 
     int stageLevel;
     bool increaseStageLevel;    // not to increase stage level at level 1
-    int moneyByStageLevel = 5;
 
     private void Awake()
     {
@@ -48,7 +49,7 @@ public class GameManager : MonoBehaviour
         nextEnemyType = 0;
 
         playerLife = 1;
-        playerMoney = 300;
+        playerMoney = startMoney;
         UIManager.S.SetLife(playerLife);
         UIManager.S.SetMoney(playerMoney);
 
