@@ -5,9 +5,13 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager S;
+
     public Transform spawnPoint_N;
     public Transform spawnPoint_S;
     public Text waveTimeText;
+
+    bool spawnOn;
 
     const float TIME_BETWEEN_SPAWNS = 0.5f;
     float nextSpawnTime;
@@ -17,10 +21,19 @@ public class GameManager : MonoBehaviour
 
     const float TIME_BETWEEN_WAVES = 21f;
     float nextWaveTime;
-
-    bool spawnOn;
-
     int nextEnemyType;
+
+    float playerLife;
+    int playerMoney;
+
+    int stageLevel;
+    bool increaseStageLevel;    // not to increase stage level at level 1
+    int moneyByStageLevel = 5;
+
+    private void Awake()
+    {
+        S = this;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +44,14 @@ public class GameManager : MonoBehaviour
         nextWaveTime = Time.time;
         spawnOn = false;
         nextEnemyType = 0;
+
+        playerLife = 1;
+        playerMoney = 0;
+        UIManager.S.SetLife(playerLife);
+        UIManager.S.SetMoney(playerMoney);
+
+        stageLevel = 1;
+        increaseStageLevel = false;
     }
 
     // Update is called once per frame
@@ -42,6 +63,8 @@ public class GameManager : MonoBehaviour
         {
             spawnOn = true;
             nextWaveTime = Time.time + TIME_BETWEEN_WAVES;
+            IncreaseStageLevel();
+            IncreaseLife(0.25f);
         }
 
         if(spawnOn && nextSpawnTime < Time.time)
@@ -71,5 +94,55 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void IncreaseStageLevel()
+    {
+        if (increaseStageLevel == false)
+            increaseStageLevel = true;
+        else
+            stageLevel++;
+    }
 
+    public void IncreaseMoneyByStageLevel()
+    {
+        IncreaseMoney(stageLevel * moneyByStageLevel);
+    }
+
+    public void IncreaseMoney(int amount)
+    {
+        playerMoney += amount;
+        playerMoney = Mathf.Min(playerMoney, 9999); // the UI looks awful if it goes over 9999
+        UIManager.S.SetMoney(playerMoney);
+    }
+
+    public void DecreaseMoney(int amount)
+    {
+        playerMoney -= amount;
+        playerMoney = Mathf.Max(playerMoney, 0);
+        UIManager.S.SetMoney(playerMoney);
+    }
+
+    public void IncreaseLife(float amount)
+    {
+        playerLife += amount;
+        playerLife = Mathf.Min(playerLife, 1); // the UI looks awful if it goes over 9999
+        UIManager.S.SetLife(playerLife);
+    }
+
+    public void DecreaseLife(float amount)
+    {
+        playerLife -= amount;
+
+        playerLife = Mathf.Max(playerLife, 0); // the UI looks awful if it goes over 9999
+        UIManager.S.SetLife(playerLife);
+
+        if(Mathf.Approximately(playerLife, 0))
+        {
+            // Game Over
+        }
+    }
+
+    public void DecreaseLife()
+    {
+        DecreaseLife(0.1f);
+    }
 }

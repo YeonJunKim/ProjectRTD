@@ -31,7 +31,7 @@ public class Enemy : BaseGameEntity
         float sqrDist = Vector3.SqrMagnitude(transform.position - destination);
         if (sqrDist < 1)
         {
-            //Damage User
+            GameManager.S.DecreaseLife();
             OnDeath();
         }
     }
@@ -58,6 +58,7 @@ public class Enemy : BaseGameEntity
         if (cur_hp <= 0)
         {
             healthbar.UpdateHealthbar(HP, 0);
+            GameManager.S.IncreaseMoneyByStageLevel();
             OnDeath();
         }
         else
