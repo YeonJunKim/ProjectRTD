@@ -2242,7 +2242,7 @@ GameObject:
   - component: {fileID: 7239084903175039295}
   - component: {fileID: 7538083966775596172}
   m_Layer: 0
-  m_Name: Golem_Blue
+  m_Name: Golem_1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2279,9 +2279,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entityType: 0
   id: 0
-  HP: 200
+  HP: 160
   DAMAGE: 0
-  ARMOR: 4
+  ARMOR: 2
   ATTK_RANGE: 0
   ATTK_SPEED: 0
   MOVE_SPEED: 3
@@ -2291,7 +2291,7 @@ MonoBehaviour:
   cur_attkRange: 0
   cur_attkSpeed: 0
   cur_moveSpeed: 0
-  enemyType: 3
+  enemyType: 4
 --- !u!1 &3673009875980166661
 GameObject:
   m_ObjectHideFlags: 0

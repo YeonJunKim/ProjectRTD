@@ -21,19 +21,9 @@ public class Tower : BaseGameEntity
     {
         base.Awake();
         animator = GetComponentInChildren<Animator>();
+        radarSystem = GetComponentInChildren<RadarSystem>();
 
         lookAtTarget = true;
-    }
-
-    // Start is called before the first frame update
-    protected override void Start()
-    {
-        base.Start();
-        radarSystem = GetComponentInChildren<RadarSystem>();
-        radarSystem.SetRadarRange(ATTK_RANGE);
-        nextAttkTime = 0;
-        nextLookAtTime = 0;
-        SetAnimation_Idle();
     }
 
     // Update is called once per frame
@@ -47,6 +37,15 @@ public class Tower : BaseGameEntity
         AttackTarget();
     }
 
+    public override void OnCreate()
+    {
+        base.OnCreate();
+        radarSystem.OnCreate(ATTK_RANGE);
+        nextAttkTime = Time.time + 0.5f;   // wait for a moment before first attack
+        nextLookAtTime = Time.time + 0.5f;
+        SetAnimation_Idle();
+    }
+    
     public override void Attack(BaseGameEntity target)
     {
         Projectile_Base projectile = EntityManager.S.GetEntity(projectileType) as Projectile_Base;
@@ -105,5 +104,10 @@ public class Tower : BaseGameEntity
             Attack(target);
             nextAttkTime = Time.time + cur_attkSpeed;
         }
+    }
+
+    public TowerType GetTowerType()
+    {
+        return towerType;
     }
 }

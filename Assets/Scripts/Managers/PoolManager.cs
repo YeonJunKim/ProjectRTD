@@ -11,20 +11,30 @@ public enum EntityType
 
 public enum EnemyType
 {
-    Wolf_Black,
-    GiantBee_Blue,
-    KingCobra_Black,
-    Golem_Blue,
+    Wolf_1,
+    KingCobra_1,
+    GiantBee_1,
+    Magma_1,
+    Golem_1,
 };
 
 public enum TowerType
 {
-    Chick,
-    LittleBoar,
-    Dragon,
-    Penguin,
-    Mushroom,
-    Momo,
+    // level 1
+    Chick_1,
+    LittleBoar_1,
+    Dragon_1,
+    Penguin_1,
+    Mushroom_1,
+    Momo_1,
+
+    // level 2
+    Chick_2,
+    //LittleBoar_2,
+    //Dragon_2,
+    //Penguin_2,
+    //Mushroom_2,
+    //Momo_2,
 };
 
 public enum ProjectileType
@@ -52,8 +62,8 @@ public class PoolManager : MonoBehaviour
     List<List<BaseGameEntity>> projectilePool;
 
     // the initial amount of objects that is intantiated in each pool
-    const int ENEMY_POOL_AMOUNT = 50;
-    const int TOWER_POOL_AMOUNT = 50;
+    const int ENEMY_POOL_AMOUNT = 30;
+    const int TOWER_POOL_AMOUNT = 20;
     const int PROJECTILE_POOL_AMOUNT = 100;
     Vector3 INIT_POSITION = new Vector3(-100, -100, -100);
 

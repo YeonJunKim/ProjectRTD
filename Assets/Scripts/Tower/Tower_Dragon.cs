@@ -6,17 +6,24 @@ public class Tower_Dragon : Tower
 {
     public ParticleSystem flamePartical;
 
-    protected override void Start()
+    float waitFlameOnCreate;    // hold flame for a while when created
+
+    public override void OnCreate()
     {
-        base.Start();
+        base.OnCreate();
         flamePartical.Stop();
         flamePartical.gameObject.SetActive(false);
+        waitFlameOnCreate = nextAttkTime;
     }
 
 
     protected override void Update()
     {
         base.Update();
+
+        // hold flame for a while when created
+        if (waitFlameOnCreate > Time.time)
+            return;
 
         Enemy target = radarSystem.GetTarget();
         if (target != null)

@@ -69,7 +69,7 @@ GameObject:
   - component: {fileID: 722817625245897831}
   - component: {fileID: 8891859642529571237}
   - component: {fileID: 7717229715993266797}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Dragon
   m_TagString: Tower
   m_Icon: {fileID: 0}

@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 1286161043780629026}
   - component: {fileID: 7671633651211067427}
   - component: {fileID: 8087653421617354446}
-  m_Layer: 0
-  m_Name: Chick
+  m_Layer: 10
+  m_Name: Chick_1
   m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -187,6 +187,18 @@ PrefabInstance:
     - target: {fileID: 420078, guid: be494e108bca3e94c9795a56b1ddcca9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420078, guid: be494e108bca3e94c9795a56b1ddcca9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 420078, guid: be494e108bca3e94c9795a56b1ddcca9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 420078, guid: be494e108bca3e94c9795a56b1ddcca9, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be494e108bca3e94c9795a56b1ddcca9, type: 3}

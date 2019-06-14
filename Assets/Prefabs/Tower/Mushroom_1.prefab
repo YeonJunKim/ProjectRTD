@@ -69,7 +69,7 @@ GameObject:
   - component: {fileID: 7759961242375361850}
   - component: {fileID: 7421368188568966836}
   - component: {fileID: 5694947468548400274}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Mushroom
   m_TagString: Tower
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ MonoBehaviour:
   cur_attkRange: 0
   cur_attkSpeed: 0
   cur_moveSpeed: 0
-  towerType: 0
+  towerType: 4
   projectileType: 0
 --- !u!65 &5694947468548400274
 BoxCollider:
@@ -187,6 +187,18 @@ PrefabInstance:
     - target: {fileID: 454834, guid: edbd40695eb40824c9487bb7887c420e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 454834, guid: edbd40695eb40824c9487bb7887c420e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 454834, guid: edbd40695eb40824c9487bb7887c420e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 454834, guid: edbd40695eb40824c9487bb7887c420e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 13777356, guid: edbd40695eb40824c9487bb7887c420e, type: 3}
       propertyPath: m_Bones.Array.data[0]

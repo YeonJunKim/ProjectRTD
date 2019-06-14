@@ -13,6 +13,8 @@ public class UIManager : MonoBehaviour
     public GameObject randomTowerButton;
     public Image randomTowerIcon;
 
+    public GameObject upgradeTowerButton;
+
     public Image[] playerLife;
     public Text playerMoney;
     public Text stageLevel;
@@ -22,19 +24,29 @@ public class UIManager : MonoBehaviour
         S = this;
     }
 
+    private void Start()
+    {
+        upgradeTowerButton.SetActive(false);
+    }
+
     public void ChangeState(PlayerControlState state)
     {
+        upgradeTowerButton.SetActive(false);
+        randomTowerIcon.gameObject.SetActive(false);
+        randomTowerButton.SetActive(false);
+
         switch (state)
         {
             case PlayerControlState.Idle:
                 randomTowerButton.SetActive(true);
-                randomTowerIcon.gameObject.SetActive(false);
                 break;
             case PlayerControlState.PlacingTower:
-                randomTowerButton.SetActive(false);
                 randomTowerIcon.gameObject.SetActive(true);
-                int type = (int)PlayerControlManager.S.GetCurrentlySelectedTower();
+                int type = (int)PlayerControlManager.S.GetRandomSelectedTower();
                 randomTowerIcon.sprite = towerIcons[type];
+                break;
+            case PlayerControlState.TowerSelected:
+                upgradeTowerButton.SetActive(true);
                 break;
         }
     }

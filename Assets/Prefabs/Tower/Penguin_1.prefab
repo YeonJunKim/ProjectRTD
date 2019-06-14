@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1333078561880338531}
   - component: {fileID: 2997344228199045220}
   - component: {fileID: 3927909902421390301}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Penguin
   m_TagString: Tower
   m_Icon: {fileID: 0}

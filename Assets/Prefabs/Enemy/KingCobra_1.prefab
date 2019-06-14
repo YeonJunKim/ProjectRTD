@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4454195819816307961}
   - component: {fileID: 3011845826058069759}
   m_Layer: 0
-  m_Name: KingCobra_Black
+  m_Name: KingCobra_1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,7 +60,7 @@ MonoBehaviour:
   cur_attkRange: 0
   cur_attkSpeed: 0
   cur_moveSpeed: 0
-  enemyType: 2
+  enemyType: 1
 --- !u!1 &8816542352447464632
 GameObject:
   m_ObjectHideFlags: 0

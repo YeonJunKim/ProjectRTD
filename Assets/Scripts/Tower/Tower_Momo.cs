@@ -14,9 +14,9 @@ public class Tower_Momo : Tower
 
     AudioSource audioSource;
 
-    protected override void Start()
+    public override void OnCreate()
     {
-        base.Start();
+        base.OnCreate();
         charge1.Stop();
         charge2.Stop();
         chargeTime = ATTK_SPEED / 3f;

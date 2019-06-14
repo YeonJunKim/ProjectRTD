@@ -17,6 +17,13 @@ public class RadarSystem : MonoBehaviour
         enemyList = new List<Enemy>();
     }
 
+    public void OnCreate(float radarRange)
+    {
+        enemyList.Clear();
+        SetRadarRange(radarRange);
+    }
+
+
     private void OnTriggerEnter(Collider other)
     {
         // only the parent is tagged (because I'm lazy)
@@ -37,12 +44,6 @@ public class RadarSystem : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void SetRadarRange(float range)
     {
         radarRange = range;
@@ -55,7 +56,7 @@ public class RadarSystem : MonoBehaviour
         Enemy closestEnemy = null;
         foreach(var enemy in enemyList)
         {
-            float dist = Vector3.Distance(transform.position, enemy.transform.position);
+            float dist = (transform.position - enemy.transform.position).sqrMagnitude;
             if(dist < closestDistanceSoFar)
             {
                 closestDistanceSoFar = dist;
@@ -88,5 +89,10 @@ public class RadarSystem : MonoBehaviour
         target = GetClosestTarget();
 
         return target;
+    }
+
+    public List<Enemy> GetEnemyList()
+    {
+        return enemyList;
     }
 }

@@ -88,6 +88,7 @@ public class BaseGameEntity : MonoBehaviour
         cur_attkRange = ATTK_RANGE;
         cur_attkSpeed = ATTK_SPEED;
         cur_moveSpeed = MOVE_SPEED;
+        curBuffers.Clear();
     }
 
     public virtual void OnDeath()

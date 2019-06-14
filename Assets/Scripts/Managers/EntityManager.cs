@@ -138,4 +138,9 @@ public class EntityManager : MonoBehaviour
             t.OnEnemyDeath(enemy);
         }
     }
+
+    public List<BaseGameEntity> GetTowerList()
+    {
+        return towerList;
+    }
 }

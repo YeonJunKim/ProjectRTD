@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 7254280317934796148}
   - component: {fileID: 4876589189195330618}
   - component: {fileID: 8975436084745835448}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Momo
   m_TagString: Tower
   m_Icon: {fileID: 0}

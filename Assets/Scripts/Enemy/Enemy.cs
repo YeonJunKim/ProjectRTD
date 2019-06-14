@@ -110,16 +110,19 @@ public class Enemy : BaseGameEntity
     {
         switch (enemyType)
         {
-            case EnemyType.Wolf_Black:
+            case EnemyType.Wolf_1:
                 animator.SetBool("Run Forward", true);
                 break;
-            case EnemyType.GiantBee_Blue:
-                animator.SetBool("Fly Forward", true);
-                break;
-            case EnemyType.KingCobra_Black:
+            case EnemyType.KingCobra_1:
                 animator.SetBool("Slither Forward", true);
                 break;
-            case EnemyType.Golem_Blue:
+            case EnemyType.GiantBee_1:
+                animator.SetBool("Fly Forward", true);
+                break;
+            case EnemyType.Magma_1:
+                animator.SetBool("Move Forward", true);
+                break;
+            case EnemyType.Golem_1:
                 animator.SetBool("Walk Forward", true);
                 break;
         }

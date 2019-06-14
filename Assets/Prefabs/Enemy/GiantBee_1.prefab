@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 298221576740068340}
   - component: {fileID: 1257498464732686014}
   m_Layer: 0
-  m_Name: GiantBee_Blue
+  m_Name: GiantBee_1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entityType: 0
   id: 0
-  HP: 100
+  HP: 120
   DAMAGE: 0
   ARMOR: 0
   ATTK_RANGE: 0
@@ -60,7 +60,7 @@ MonoBehaviour:
   cur_attkRange: 0
   cur_attkSpeed: 0
   cur_moveSpeed: 0
-  enemyType: 1
+  enemyType: 2
 --- !u!1 &8121847505272226271
 GameObject:
   m_ObjectHideFlags: 0
