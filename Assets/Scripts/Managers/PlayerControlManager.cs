@@ -99,7 +99,6 @@ public class PlayerControlManager : MonoBehaviour
             return;
 
         selectedTower = RandomTowerDraw();
-        //selectedTower = TowerType.Penguin;
         ChangeState(PlayerControlState.PlacingTower);
     }
 
@@ -166,11 +165,11 @@ public class PlayerControlManager : MonoBehaviour
         Dictionary<TowerType, int> chances = new Dictionary<TowerType, int>();
 
         chances.Add(TowerType.Chick, 100);
-        chances.Add(TowerType.LittleBoar, 50);
+        chances.Add(TowerType.LittleBoar, 5000);
         chances.Add(TowerType.Dragon, 50);
         chances.Add(TowerType.Penguin, 50);
         chances.Add(TowerType.Mushroom, 50);
-        chances.Add(TowerType.Momo, 50);
+        chances.Add(TowerType.Momo, 5000);
 
         int sum = 0;
         foreach(var chance in chances)

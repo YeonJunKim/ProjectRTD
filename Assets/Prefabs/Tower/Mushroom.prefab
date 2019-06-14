@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 7421368188568966836}
   - component: {fileID: 5694947468548400274}
   m_Layer: 0
-  m_Name: Lion
+  m_Name: Mushroom
   m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

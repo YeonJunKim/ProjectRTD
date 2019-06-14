@@ -10,9 +10,9 @@ public class Tower_Momo : Tower
 
     float chargeTime;
     const float laserDuration = 0.3f;       // laserDuration * laserFrequency * cur_damage = damage
-    const float laserFrequency = 0.01f;     // laserDuration * laserFrequency * cur_damage = damage
+    const float laserFrequency = 0.02f;     // laserDuration * laserFrequency * cur_damage = damage
 
-    AudioSource audio;
+    AudioSource audioSource;
 
     protected override void Start()
     {
@@ -21,7 +21,7 @@ public class Tower_Momo : Tower
         charge2.Stop();
         chargeTime = ATTK_SPEED / 3f;
 
-        audio = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     public override void Attack(BaseGameEntity target)
@@ -33,7 +33,7 @@ public class Tower_Momo : Tower
     {
         lookAtTarget = false;
 
-        audio.PlayOneShot(audio.clip);
+        audioSource.Play();
         charge1.Play();
         charge2.Play();
 
@@ -70,7 +70,12 @@ public class Tower_Momo : Tower
                 yield return new WaitForSeconds(laserFrequency);
             }
         }
-        yield return new WaitForSeconds(laserDuration);
+        else
+        {
+            audioSource.Stop();
+        }
+        yield return new WaitForSeconds(chargeTime);
+        audioSource.Stop();
         lookAtTarget = true;
     }
 
@@ -84,8 +89,8 @@ public class Tower_Momo : Tower
     protected override void SetAnimation_Attack()
     {
         CancelInvoke();
-        animator.speed = 1 / ATTK_SPEED;
+        animator.speed = 2;
         animator.SetInteger("animation", 2);
-        Invoke("SetAnimation_Idle", ATTK_SPEED / 2);
+        Invoke("SetAnimation_Idle", 0.3f);
     }
 }

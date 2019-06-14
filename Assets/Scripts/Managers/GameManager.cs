@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     const int SPAWN_AMOUNT_PER_WAVE = 20;
     int countSpawn;
 
-    const float TIME_BETWEEN_WAVES = 1f;
+    const float TIME_BETWEEN_WAVES = 21f;
     float nextWaveTime;
 
     bool spawnOn;
@@ -25,7 +25,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        nextSpawnTime = TIME_BETWEEN_WAVES;
+        //nextSpawnTime = TIME_BETWEEN_WAVES;
+        nextSpawnTime = 1f; // for testing
         countSpawn = 0;
         nextWaveTime = Time.time;
         spawnOn = false;
@@ -50,10 +51,12 @@ public class GameManager : MonoBehaviour
             enemyN.transform.Translate(0, 0.5f, 0); // for enemy to be on NavMesh
             enemyN.SetDestination(spawnPoint_S.position);
 
-            Enemy enemyS = EntityManager.S.GetEntity((EnemyType)nextEnemyType) as Enemy;
-            enemyS.transform.position = spawnPoint_S.position;
-            enemyS.transform.Translate(0, 0.5f, 0); // for enemy to be on NavMesh
-            enemyS.SetDestination(spawnPoint_N.position);
+
+            // thinking of having monsters just spawn in one side
+            //Enemy enemyS = EntityManager.S.GetEntity((EnemyType)nextEnemyType) as Enemy;
+            //enemyS.transform.position = spawnPoint_S.position;
+            //enemyS.transform.Translate(0, 0.5f, 0); // for enemy to be on NavMesh
+            //enemyS.SetDestination(spawnPoint_N.position);
 
             countSpawn++;
             nextSpawnTime = Time.time + TIME_BETWEEN_SPAWNS;

@@ -109,7 +109,7 @@ MonoBehaviour:
   entityType: 1
   id: 0
   HP: 0
-  DAMAGE: 10
+  DAMAGE: 5
   ARMOR: 0
   ATTK_RANGE: 12
   ATTK_SPEED: 2.5
@@ -279,16 +279,16 @@ PrefabInstance:
       value: MagicSphereYellow
       objectReference: {fileID: 0}
     - target: {fileID: 19861428, guid: 5bc71fb5e90182941b584e88079e3ec5, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19861428, guid: 5bc71fb5e90182941b584e88079e3ec5, type: 3}
       propertyPath: InitialModule.startSizeY.minMaxState
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 19861428, guid: 5bc71fb5e90182941b584e88079e3ec5, type: 3}
       propertyPath: InitialModule.startSizeZ.minMaxState
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 19861428, guid: 5bc71fb5e90182941b584e88079e3ec5, type: 3}
-      propertyPath: playOnAwake
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 493452, guid: 5bc71fb5e90182941b584e88079e3ec5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -360,16 +360,16 @@ PrefabInstance:
       value: MagicChargeYellow
       objectReference: {fileID: 0}
     - target: {fileID: 19829286, guid: 1fc71432c1bd537489e1be6246b56973, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19829286, guid: 1fc71432c1bd537489e1be6246b56973, type: 3}
       propertyPath: InitialModule.startSizeY.minMaxState
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 19829286, guid: 1fc71432c1bd537489e1be6246b56973, type: 3}
       propertyPath: InitialModule.startSizeZ.minMaxState
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 19829286, guid: 1fc71432c1bd537489e1be6246b56973, type: 3}
-      propertyPath: playOnAwake
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 484424, guid: 1fc71432c1bd537489e1be6246b56973, type: 3}
       propertyPath: m_LocalPosition.x
@@ -509,6 +509,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 19821232, guid: b7e5be8cde65c7c42915ee6e2273d19b, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19821232, guid: b7e5be8cde65c7c42915ee6e2273d19b, type: 3}
       propertyPath: InitialModule.startRotationX.minMaxState
       value: 3
       objectReference: {fileID: 0}
@@ -516,7 +520,7 @@ PrefabInstance:
       propertyPath: InitialModule.startRotationY.minMaxState
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 19821232, guid: b7e5be8cde65c7c42915ee6e2273d19b, type: 3}
+    - target: {fileID: 19893790, guid: b7e5be8cde65c7c42915ee6e2273d19b, type: 3}
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
@@ -535,10 +539,6 @@ PrefabInstance:
     - target: {fileID: 19893790, guid: b7e5be8cde65c7c42915ee6e2273d19b, type: 3}
       propertyPath: InitialModule.startRotationY.minMaxState
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 19893790, guid: b7e5be8cde65c7c42915ee6e2273d19b, type: 3}
-      propertyPath: playOnAwake
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 19876112, guid: b7e5be8cde65c7c42915ee6e2273d19b, type: 3}
       propertyPath: playOnAwake
@@ -613,6 +613,18 @@ PrefabInstance:
     - target: {fileID: 465312, guid: 8ccf10cec3b3de5478c3a78d804ffa82, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 465312, guid: 8ccf10cec3b3de5478c3a78d804ffa82, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 465312, guid: 8ccf10cec3b3de5478c3a78d804ffa82, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 465312, guid: 8ccf10cec3b3de5478c3a78d804ffa82, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 13796370, guid: 8ccf10cec3b3de5478c3a78d804ffa82, type: 3}
       propertyPath: m_Bones.Array.data[0]

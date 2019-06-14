@@ -8,8 +8,12 @@ public class Enemy : BaseGameEntity
     public EnemyType enemyType;
 
     Animator animator;
+
     NavMeshAgent navMeshAgent;
     Vector3 destination;
+    const float angularSpeed = 500;    // make it fast enough to turn quickly
+    const float acceleration = 30;     // make it fast enough to turn quickly
+
     Healthbar healthbar;
     
 
@@ -82,6 +86,8 @@ public class Enemy : BaseGameEntity
 
         navMeshAgent = gameObject.AddComponent<NavMeshAgent>();
         navMeshAgent.speed = MOVE_SPEED;
+        navMeshAgent.angularSpeed = angularSpeed;    // make it fast enough to turn quickly
+        navMeshAgent.acceleration = acceleration;    // make it fast enough to turn quickly
     }
 
     public override void RegisterBuffer(Buffer buffer)
