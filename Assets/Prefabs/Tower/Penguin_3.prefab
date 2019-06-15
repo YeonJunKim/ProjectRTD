@@ -108,10 +108,10 @@ MonoBehaviour:
   entityType: 1
   id: 0
   HP: 0
-  DAMAGE: 30
+  DAMAGE: 20
   ARMOR: 0
   ATTK_RANGE: 9
-  ATTK_SPEED: 0.3
+  ATTK_SPEED: 0.6
   MOVE_SPEED: 0
   cur_hp: 0
   cur_damage: 0

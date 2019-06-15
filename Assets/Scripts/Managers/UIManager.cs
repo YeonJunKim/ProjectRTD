@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
 
     public GameObject randomTowerButton;
     public Image randomTowerIcon;
+    public GameObject randomTowerIconBG;
 
     public GameObject upgradeTowerButton;
 
@@ -34,6 +35,7 @@ public class UIManager : MonoBehaviour
         upgradeTowerButton.SetActive(false);
         randomTowerIcon.gameObject.SetActive(false);
         randomTowerButton.SetActive(false);
+        randomTowerIconBG.SetActive(false);
 
         switch (state)
         {
@@ -42,6 +44,7 @@ public class UIManager : MonoBehaviour
                 break;
             case PlayerControlState.PlacingTower:
                 randomTowerIcon.gameObject.SetActive(true);
+                randomTowerIconBG.SetActive(true);
                 int type = (int)PlayerControlManager.S.GetRandomSelectedTower();
                 randomTowerIcon.sprite = towerIcons[type];
                 break;
