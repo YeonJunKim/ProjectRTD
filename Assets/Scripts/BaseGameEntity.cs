@@ -164,65 +164,35 @@ public class BaseGameEntity : MonoBehaviour
         }
     }
 
-    //public float DAMAGE
-    //{
-    //    get {
-    //        return damage;
-    //    }
-    //    set {
-    //        damage = value;
-    //    }
-    //}
+    public float _DAMAGE
+    {
+        get { return DAMAGE; }
+    }
 
 
-    //public float HP
-    //{
-    //    get {
-    //        return hp;
-    //    }
-    //    set {
-    //        hp = value;
-    //    }
-    //}
+    public float _HP
+    {
+        get { return HP; }
+    }
 
 
-    //public float ARMOR
-    //{
-    //    get {
-    //        return armor;
-    //    }
-    //    set {
-    //        armor = value;
-    //    }
-    //}
+    public float _ARMOR
+    {
+        get { return ARMOR; }
+    }
 
-    //public float ATTK_RANGE
-    //{
-    //    get {
-    //        return attkRange;
-    //    }
-    //    set {
-    //        attkRange = value;
-    //    }
-    //}
+    public float _ATTK_RANGE
+    {
+        get { return ATTK_RANGE; }
+    }
 
-    //public float ATTK_SPEED
-    //{
-    //    get {
-    //        return attkSpeed;
-    //    }
-    //    set {
-    //        attkSpeed = value;
-    //    }
-    //}
+    public float _ATTK_SPEED
+    {
+        get { return ATTK_SPEED; }
+    }
 
-    //public float MOVE_SPEED
-    //{
-    //    get {
-    //        return moveSpeed;
-    //    }
-    //    set {
-    //        moveSpeed = value;
-    //    }
-    //}
+    public float _MOVE_SPEED
+    {
+        get { return MOVE_SPEED; }
+    }
 }

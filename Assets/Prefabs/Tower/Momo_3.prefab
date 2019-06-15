@@ -52,7 +52,7 @@ MonoBehaviour:
   entityType: 1
   id: 0
   HP: 0
-  DAMAGE: 50
+  DAMAGE: 800
   ARMOR: 0
   ATTK_RANGE: 15
   ATTK_SPEED: 2.5
@@ -279,6 +279,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: MagicChargeGreen
       objectReference: {fileID: 0}
+    - target: {fileID: 19890388, guid: 8d2980ba5e59f33419a0275c1ec29e38, type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19890388, guid: 8d2980ba5e59f33419a0275c1ec29e38, type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19890388, guid: 8d2980ba5e59f33419a0275c1ec29e38, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 442136, guid: 8d2980ba5e59f33419a0275c1ec29e38, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -334,18 +346,6 @@ PrefabInstance:
     - target: {fileID: 442136, guid: 8d2980ba5e59f33419a0275c1ec29e38, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 19890388, guid: 8d2980ba5e59f33419a0275c1ec29e38, type: 3}
-      propertyPath: InitialModule.startSizeY.minMaxState
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 19890388, guid: 8d2980ba5e59f33419a0275c1ec29e38, type: 3}
-      propertyPath: InitialModule.startSizeZ.minMaxState
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 19890388, guid: 8d2980ba5e59f33419a0275c1ec29e38, type: 3}
-      propertyPath: playOnAwake
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d2980ba5e59f33419a0275c1ec29e38, type: 3}
@@ -533,6 +533,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: NovaLightningGreen
       objectReference: {fileID: 0}
+    - target: {fileID: 19874888, guid: b4c6e36503ea28e40b299f5d88269621, type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19874888, guid: b4c6e36503ea28e40b299f5d88269621, type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19874888, guid: b4c6e36503ea28e40b299f5d88269621, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 482896, guid: b4c6e36503ea28e40b299f5d88269621, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -577,23 +589,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 19874888, guid: b4c6e36503ea28e40b299f5d88269621, type: 3}
-      propertyPath: InitialModule.startRotationX.minMaxState
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 19874888, guid: b4c6e36503ea28e40b299f5d88269621, type: 3}
-      propertyPath: InitialModule.startRotationY.minMaxState
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 19874888, guid: b4c6e36503ea28e40b299f5d88269621, type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 19874568, guid: b4c6e36503ea28e40b299f5d88269621, type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 19824278, guid: b4c6e36503ea28e40b299f5d88269621, type: 3}
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
@@ -618,6 +614,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 19872874, guid: b4c6e36503ea28e40b299f5d88269621, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19824278, guid: b4c6e36503ea28e40b299f5d88269621, type: 3}
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
@@ -647,6 +647,18 @@ PrefabInstance:
     - target: {fileID: 112812, guid: 347c3709b22d3bb4b800383efe154521, type: 3}
       propertyPath: m_Name
       value: MagicSphereGreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 19898342, guid: 347c3709b22d3bb4b800383efe154521, type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19898342, guid: 347c3709b22d3bb4b800383efe154521, type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19898342, guid: 347c3709b22d3bb4b800383efe154521, type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 499104, guid: 347c3709b22d3bb4b800383efe154521, type: 3}
       propertyPath: m_LocalPosition.x
@@ -703,18 +715,6 @@ PrefabInstance:
     - target: {fileID: 499104, guid: 347c3709b22d3bb4b800383efe154521, type: 3}
       propertyPath: m_LocalScale.z
       value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 19898342, guid: 347c3709b22d3bb4b800383efe154521, type: 3}
-      propertyPath: InitialModule.startSizeY.minMaxState
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 19898342, guid: 347c3709b22d3bb4b800383efe154521, type: 3}
-      propertyPath: InitialModule.startSizeZ.minMaxState
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 19898342, guid: 347c3709b22d3bb4b800383efe154521, type: 3}
-      propertyPath: playOnAwake
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 347c3709b22d3bb4b800383efe154521, type: 3}
