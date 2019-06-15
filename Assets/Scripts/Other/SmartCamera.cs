@@ -55,8 +55,18 @@ public class SmartCamera : MonoBehaviour
         }
         else
         {
-            transform.Translate(_target.forward * 1.5f);
-            transform.Translate(_target.up * 1f);
+            TowerType towerType = _target.GetComponent<Tower>().towerType;
+            if (towerType == TowerType.Chick_1 || towerType == TowerType.Chick_2 || towerType == TowerType.Penguin_1 )
+            {
+                transform.Translate(_target.forward * 1.5f);
+                transform.Translate(_target.up * 1f);
+            }
+            else
+            {
+                transform.Translate(_target.forward * 2f);
+                transform.Translate(_target.up * 1.5f);
+                lookAtPos.y += 0.5f;
+            }
         }
         transform.LookAt(lookAtPos);
         deltaPos = transform.position - _target.position;
