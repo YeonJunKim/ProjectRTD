@@ -40,6 +40,7 @@ public class Projectile_Ice : Projectile_Base
                 if (target.gameObject.activeInHierarchy)
                 {
                     targetPos = target.position;
+                    targetPos.y += 0.5f; // move it a little bit up to see it above ground;
                     LookAt_Yaxis(targetPos);
                 }
                 transform.position = Vector3.Lerp(startPos, targetPos, progress);

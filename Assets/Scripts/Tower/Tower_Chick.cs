@@ -10,6 +10,10 @@ public class Tower_Chick : Tower
             base.Attack(target);
         else if (towerType == TowerType.Chick_2)
             AttackMultipleEnemies(3);
+        else if (towerType == TowerType.Chick_3)
+            AttackMultipleEnemies(5);
+        else
+            base.Attack(target);
     }
 
     protected override void SetAnimation_Idle()

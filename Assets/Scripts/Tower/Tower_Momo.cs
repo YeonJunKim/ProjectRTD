@@ -11,6 +11,7 @@ public class Tower_Momo : Tower
     float chargeTime;
     const float laserDuration = 0.3f;       // laserDuration * laserFrequency * cur_damage = damage
     const float laserFrequency = 0.02f;     // laserDuration * laserFrequency * cur_damage = damage
+    bool lookAtTarget;    // this is used in laser tower, when charging laser
 
     AudioSource audioSource;
 
@@ -20,8 +21,19 @@ public class Tower_Momo : Tower
         charge1.Stop();
         charge2.Stop();
         chargeTime = ATTK_SPEED / 3f;
-
+        lookAtTarget = true;
         audioSource = GetComponent<AudioSource>();
+    }
+
+    // Update is called once per frame
+    protected override void Update()
+    {
+        BufferManagement();
+
+        if(lookAtTarget)
+            LookAtTarget();
+
+        AttackTarget();
     }
 
     public override void Attack(BaseGameEntity target)

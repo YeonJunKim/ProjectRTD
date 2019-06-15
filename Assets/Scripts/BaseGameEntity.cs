@@ -31,18 +31,7 @@ public class BaseGameEntity : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (curBuffers.Count == 0)
-            return;
-
-        foreach (var buffer in curBuffers)
-        {
-            buffer.Update();
-            if (buffer.isAlive == false)
-            {
-                DeregisterBuffer(buffer);
-                break;
-            }
-        }
+        BufferManagement();
     }
 
     public EntityType ENTITY_TYPE
@@ -150,6 +139,23 @@ public class BaseGameEntity : MonoBehaviour
         Vector3 difference = targetPos - transform.position;
         float rotationY = Mathf.Atan2(difference.x, difference.z) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0.0f, rotationY, 0.0f);
+    }
+
+    // we only want to rotate the Y axis when looking at the target
+    protected void BufferManagement()
+    {
+        if (curBuffers.Count == 0)
+            return;
+
+        foreach (var buffer in curBuffers)
+        {
+            buffer.Update();
+            if (buffer.isAlive == false)
+            {
+                DeregisterBuffer(buffer);
+                break;
+            }
+        }
     }
 
     //public float DAMAGE

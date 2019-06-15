@@ -16,7 +16,6 @@ public class Tower_Dragon : Tower
         waitFlameOnCreate = nextAttkTime;
     }
 
-
     protected override void Update()
     {
         base.Update();
@@ -36,6 +35,17 @@ public class Tower_Dragon : Tower
             flamePartical.Stop();
             flamePartical.gameObject.SetActive(false);
         }
+    }
+
+    public override void Attack(BaseGameEntity target)
+    {
+        Projectile_Flame projectile = EntityManager.S.GetEntity(projectileType) as Projectile_Flame;
+        projectile.transform.position = transform.position;
+        projectile.transform.rotation = transform.rotation; // becuase the tower is already looking at the enemy
+        projectile.scaleWidth = flamePartical.transform.localScale.x;   // scale as the flame particle does
+
+        projectile.FireProjectile(target.transform, cur_damage, cur_attkRange);
+        SetAnimation_Attack();
     }
 
     protected override void SetAnimation_Idle()

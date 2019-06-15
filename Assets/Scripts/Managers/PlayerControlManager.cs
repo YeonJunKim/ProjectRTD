@@ -263,7 +263,7 @@ public class PlayerControlManager : MonoBehaviour
         chances.Add(TowerType.Dragon_1, 50);
         chances.Add(TowerType.Penguin_1, 50);
         chances.Add(TowerType.Mushroom_1, 50);
-        chances.Add(TowerType.Momo_1, 50);
+        chances.Add(TowerType.Momo_1, 5000);
 
         int sum = 0;
         foreach(var chance in chances)

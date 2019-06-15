@@ -15,15 +15,11 @@ public class Tower : BaseGameEntity
 
     protected Animator animator;
 
-    protected bool lookAtTarget;    // this is used in laser tower, when charging laser
-
     protected override void Awake()
     {
         base.Awake();
         animator = GetComponentInChildren<Animator>();
         radarSystem = GetComponentInChildren<RadarSystem>();
-
-        lookAtTarget = true;
     }
 
     // Update is called once per frame
@@ -31,9 +27,7 @@ public class Tower : BaseGameEntity
     {
         base.Update();
 
-        if(lookAtTarget)
-            LookAtTarget();
-
+        LookAtTarget();
         AttackTarget();
     }
 
@@ -42,7 +36,7 @@ public class Tower : BaseGameEntity
         base.OnCreate();
         radarSystem.OnCreate(ATTK_RANGE);
         nextAttkTime = Time.time + 0.5f;   // wait for a moment before first attack
-        nextLookAtTime = Time.time + 0.5f;
+        nextLookAtTime = Time.time + 0.4f;
         SetAnimation_Idle();
     }
     
@@ -86,7 +80,7 @@ public class Tower : BaseGameEntity
         // defined by child
     }
 
-    void LookAtTarget()
+    protected void LookAtTarget()
     {
         Enemy target = radarSystem.GetTarget();
         if (target != null && nextLookAtTime < Time.time)
@@ -96,7 +90,7 @@ public class Tower : BaseGameEntity
         }
     }
 
-    void AttackTarget()
+    protected void AttackTarget()
     {
         Enemy target = radarSystem.GetTarget();
         if (target != null && nextAttkTime < Time.time)

@@ -110,7 +110,7 @@ MonoBehaviour:
   HP: 0
   DAMAGE: 3
   ARMOR: 0
-  ATTK_RANGE: 9
+  ATTK_RANGE: 6
   ATTK_SPEED: 0.1
   MOVE_SPEED: 0
   cur_hp: 0

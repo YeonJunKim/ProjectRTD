@@ -313,7 +313,7 @@ MonoBehaviour:
   entityType: 1
   id: 0
   HP: 0
-  DAMAGE: 10
+  DAMAGE: 15
   ARMOR: 0
   ATTK_RANGE: 10
   ATTK_SPEED: 0.5
@@ -539,7 +539,7 @@ PrefabInstance:
     - target: {fileID: 6970067727863984326, guid: 874dbfd5b0d440b4787e170d6ac9a8f8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.15
+      value: 0.105
       objectReference: {fileID: 0}
     - target: {fileID: 6970067727863984326, guid: 874dbfd5b0d440b4787e170d6ac9a8f8,
         type: 3}

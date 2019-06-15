@@ -679,6 +679,12 @@ MonoBehaviour:
   - {fileID: 4665858323920571874, guid: ff729b76f92b3204e924137e5b38b13a, type: 3}
   - {fileID: 5999449574549395976, guid: 8d97a06ff1a888c48afeefb4897f7db1, type: 3}
   - {fileID: 9135675088013450994, guid: 667b5588a7cc2f348a767d85aadeddd9, type: 3}
+  - {fileID: 1092661119330889100, guid: 2d8ea039b5d3b3c41a2f396e80b78b24, type: 3}
+  - {fileID: 3494874546819706683, guid: 149a4fc46e342a148b19b5bb2afa773d, type: 3}
+  - {fileID: 1503838235588769986, guid: f8bc13dbd66ea0c4baab3eb45d826851, type: 3}
+  - {fileID: 1753513756911761074, guid: 445b52966bd12134384d3bd93dde2336, type: 3}
+  - {fileID: 1734349443251227271, guid: 7c6db7bcf72092a4eb847cc4e857da77, type: 3}
+  - {fileID: 4881890732719165801, guid: d2cf2c4c19436784999f14e267afa6d9, type: 3}
   projectilePrefabs:
   - {fileID: 8580606040232312991, guid: 86e02ccab90d286428b853e4168accaa, type: 3}
   - {fileID: 5376749671823902023, guid: 027a2ffefa171584dbbc02afb43c1656, type: 3}
@@ -686,6 +692,7 @@ MonoBehaviour:
   - {fileID: 8580606040232312991, guid: a8a33c437ea9ebe4285f39901603a356, type: 3}
   - {fileID: 360557433, guid: a57994e5b6fea22438094532090a7978, type: 3}
   - {fileID: 4055021692388459502, guid: f7991b53894cd0740af43ccb156d0df3, type: 3}
+  - {fileID: 5820953485357611015, guid: 5ff3a375cb129c642ab4cfc33b412805, type: 3}
 --- !u!4 &417570723
 Transform:
   m_ObjectHideFlags: 0

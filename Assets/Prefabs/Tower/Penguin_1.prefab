@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 4967358537105224399}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children:
   - {fileID: 3011202608591769375}
   - {fileID: 461476443962458856}
@@ -49,10 +49,10 @@ MonoBehaviour:
   entityType: 1
   id: 0
   HP: 0
-  DAMAGE: 3
+  DAMAGE: 5
   ARMOR: 0
-  ATTK_RANGE: 9
-  ATTK_SPEED: 0.6
+  ATTK_RANGE: 7
+  ATTK_SPEED: 1.2
   MOVE_SPEED: 0
   cur_hp: 0
   cur_damage: 0
