@@ -11,6 +11,7 @@ public class Tower_Momo : Tower
     float chargeTime;
     const float laserDuration = 0.3f;       // laserDuration * laserFrequency * cur_damage = damage
     const float laserFrequency = 0.02f;     // laserDuration * laserFrequency * cur_damage = damage
+    float laserBulletsPerAttack;
     bool lookAtTarget;    // this is used in laser tower, when charging laser
 
     AudioSource audioSource;
@@ -23,6 +24,7 @@ public class Tower_Momo : Tower
         chargeTime = ATTK_SPEED / 3f;
         lookAtTarget = true;
         audioSource = GetComponent<AudioSource>();
+        laserBulletsPerAttack = laserDuration / laserFrequency;
     }
 
     // Update is called once per frame
@@ -78,7 +80,7 @@ public class Tower_Momo : Tower
                 pos.y += 0.5f;  // increase Y pos, so the laser is above the ground
                 projectile.transform.position = pos;
                 projectile.transform.rotation = transform.rotation; // becuase the tower is already looking at the enemy
-                projectile.FireProjectile(target.transform, cur_damage, cur_attkRange); // Laser projectile doesn't use target, so we don't need to check null
+                projectile.FireProjectile(target.transform, cur_damage / laserBulletsPerAttack, cur_attkRange); // Laser projectile doesn't use target, so we don't need to check null
                 yield return new WaitForSeconds(laserFrequency);
             }
         }

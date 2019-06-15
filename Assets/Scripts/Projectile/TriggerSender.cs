@@ -8,13 +8,13 @@ public class TriggerSender : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.transform.parent.tag == "Enemy")
-            master.OnTriggerEnter_FromCollider(other.transform.parent.GetComponent<BaseGameEntity>());
+        if(other.tag == "Enemy")
+            master.OnTriggerEnter_FromCollider(other.GetComponent<BaseGameEntity>());
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.transform.parent.tag == "Enemy")
-            master.OnTriggerExit_FromCollider(other.transform.parent.GetComponent<BaseGameEntity>());
+        if (other.tag == "Enemy")
+            master.OnTriggerExit_FromCollider(other.GetComponent<BaseGameEntity>());
     }
 }

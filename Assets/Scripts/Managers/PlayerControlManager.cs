@@ -26,8 +26,8 @@ public class PlayerControlManager : MonoBehaviour
 
     Vector3 screenMoveDelta;
 
-    public GameObject selectedCircle;
-    Tower selectedTower;
+    public SelectedCircle selectedCircle;
+    BaseGameEntity selectedEntity;
 
     const int numOfLevel1Tower = 6;
 
@@ -37,7 +37,7 @@ public class PlayerControlManager : MonoBehaviour
             S = this;
 
         screenMoveDelta = Vector3.zero;
-        selectedTower = null;
+        selectedEntity = null;
     }
 
     private void Start()
@@ -53,6 +53,17 @@ public class PlayerControlManager : MonoBehaviour
 
         // Screen Move by button
         Camera.main.transform.Translate(screenMoveDelta * Time.deltaTime * screenMoveSpeed);
+
+        // Check Selected Entity Death
+        if (selectedEntity != null)
+        {
+            if(selectedEntity.gameObject.activeInHierarchy == false)
+            {
+                selectedEntity = null;
+                selectedCircle.gameObject.SetActive(false);
+                UIManager.S.HideInfoView();
+            }
+        }
     }
 
     void PlayerControl()
@@ -95,19 +106,28 @@ public class PlayerControlManager : MonoBehaviour
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
-                if (Physics.Raycast(ray, out hit, 100, 1 << 10))    // only hit Towers
+                if (Physics.Raycast(ray, out hit, 100, (1 << 10) + (1 << 11)))    // only hit Towers and Enemys
                 {
-                    Vector3 pos = hit.transform.position;
-                    pos.y += 0.2f;  // to put it on top of the block
-                    selectedCircle.transform.position = pos;
-                    selectedCircle.SetActive(true);
-                    selectedTower = hit.transform.GetComponent<Tower>();
-                    ChangeState(PlayerControlState.TowerSelected);
+                    selectedEntity = hit.transform.GetComponent<BaseGameEntity>();
+                    UIManager.S.ShowInfoView(selectedEntity);
+                    selectedCircle.gameObject.SetActive(true);
+
+                    if (selectedEntity.ENTITY_TYPE == EntityType.Enemy)
+                    {
+                        selectedCircle.SetTarget(hit.transform, true);
+                        ChangeState(PlayerControlState.Idle);
+                    }
+                    else if(selectedEntity.ENTITY_TYPE == EntityType.Tower)
+                    {
+                        selectedCircle.SetTarget(hit.transform, false);
+                        ChangeState(PlayerControlState.TowerSelected);
+                    }
                 }
                 else
                 {
-                    selectedCircle.SetActive(false);
-                    selectedTower = null;
+                    UIManager.S.HideInfoView();
+                    selectedCircle.gameObject.SetActive(false);
+                    selectedEntity = null;
                     ChangeState(PlayerControlState.Idle);
                 }
             }
@@ -191,7 +211,7 @@ public class PlayerControlManager : MonoBehaviour
 
     public void OnUpgradeTowerButton()
     {
-        if (state != PlayerControlState.TowerSelected || selectedTower == null)
+        if (state != PlayerControlState.TowerSelected || selectedEntity == null)
             return;
 
         if (GameManager.S.GetMoney() < GameManager.MONEY_FOR_TOWER_UPGRADE)
@@ -205,22 +225,24 @@ public class PlayerControlManager : MonoBehaviour
         EntityManager.S.ReturnEntity(closestTowers[0]);
         EntityManager.S.ReturnEntity(closestTowers[1]);
 
-        CreateTower(selectedTower.GetTowerType() + numOfLevel1Tower, selectedTower.transform.position);
-        EntityManager.S.ReturnEntity(selectedTower);
+        BaseGameEntity temp = CreateTower(((Tower)selectedEntity).GetTowerType() + numOfLevel1Tower, selectedEntity.transform.position);
 
-        selectedCircle.SetActive(false);
-        selectedTower = null;
+        EntityManager.S.ReturnEntity(selectedEntity);
+        selectedEntity = temp;
+
+        UIManager.S.ShowInfoView(selectedEntity);
+
         GameManager.S.DecreaseMoney(GameManager.MONEY_FOR_TOWER_UPGRADE);
-        ChangeState(PlayerControlState.Idle);
     }
 
     List<Tower> FindClosestSameTowersFromSelectedTower()
     {
         List<BaseGameEntity> towerList = EntityManager.S.GetTowerList();
         List<Tower> sameTowerList = new List<Tower>();
-        Vector3 selectedTowerPos = selectedTower.transform.position;
+        Vector3 selectedTowerPos = selectedEntity.transform.position;
+        Tower selectedTower = selectedEntity as Tower;
 
-        foreach(var entity in towerList)
+        foreach (var entity in towerList)
         {
             Tower t = entity as Tower;
             if(t != selectedTower && t.GetTowerType() == selectedTower.GetTowerType())
@@ -246,11 +268,13 @@ public class PlayerControlManager : MonoBehaviour
         return sameTowerList;
     }
 
-    void CreateTower(TowerType towerType, Vector3 pos)
+    Tower CreateTower(TowerType towerType, Vector3 pos)
     {
         GameObject tower = EntityManager.S.GetEntity(towerType).gameObject;
         tower.transform.position = pos;
         tower.transform.eulerAngles = new Vector3(0, 180, 0);
+
+        return tower.GetComponent<Tower>();
     }
 
 
@@ -258,10 +282,10 @@ public class PlayerControlManager : MonoBehaviour
     {
         Dictionary<TowerType, int> chances = new Dictionary<TowerType, int>();
 
-        chances.Add(TowerType.Chick_1, 5000);
+        chances.Add(TowerType.Chick_1, 50);
         chances.Add(TowerType.LittleBoar_1, 50);
         chances.Add(TowerType.Dragon_1, 50);
-        chances.Add(TowerType.Penguin_1, 5000);
+        chances.Add(TowerType.Penguin_1, 50);
         chances.Add(TowerType.Mushroom_1, 50);
         chances.Add(TowerType.Momo_1, 50);
 

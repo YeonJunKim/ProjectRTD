@@ -109,7 +109,7 @@ MonoBehaviour:
   entityType: 1
   id: 0
   HP: 0
-  DAMAGE: 5
+  DAMAGE: 75
   ARMOR: 0
   ATTK_RANGE: 15
   ATTK_SPEED: 2.5

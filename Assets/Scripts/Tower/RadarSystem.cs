@@ -27,9 +27,9 @@ public class RadarSystem : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // only the parent is tagged (because I'm lazy)
-        if(other.transform.parent.tag == "Enemy")
+        if(other.tag == "Enemy")
         {
-            Enemy enemy = other.GetComponentInParent<Enemy>();
+            Enemy enemy = other.GetComponent<Enemy>();
             if (!enemyList.Contains(enemy))
                 enemyList.Add(enemy);
         }
@@ -37,9 +37,9 @@ public class RadarSystem : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.transform.parent.tag == "Enemy")
+        if(other.tag == "Enemy")
         {
-            Enemy enemy = other.GetComponentInParent<Enemy>();
+            Enemy enemy = other.GetComponent<Enemy>();
             RemoveEnemyFromRadarList(enemy);
         }
     }
