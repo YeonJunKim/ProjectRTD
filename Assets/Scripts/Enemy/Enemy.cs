@@ -15,7 +15,7 @@ public class Enemy : BaseGameEntity
     const float acceleration = 30;     // make it fast enough to turn quickly
 
     Healthbar healthbar;
-    
+    bool poisonLock = true;
 
     protected override void Awake()
     {
@@ -96,15 +96,39 @@ public class Enemy : BaseGameEntity
         base.RegisterBuffer(buffer);
 
         navMeshAgent.speed = cur_moveSpeed;
+        if(cur_dotDamge > 0.0f&&poisonLock)
+        {
+            float curdotDamge = cur_dotDamge;
+            StartCoroutine(DotDamage(Mathf.RoundToInt(cur_dotBuffer.lifeTime), curdotDamge));
+        }
     }
 
     protected override void DeregisterBuffer(Buffer buffer)
     {
         base.DeregisterBuffer(buffer);
-
+        if (cur_dotDamge > 0.0f && poisonLock)
+        {
+            float curdotDamge = cur_dotDamge;
+            StartCoroutine(DotDamage(Mathf.RoundToInt(cur_dotBuffer.lifeTime), curdotDamge));
+        }
         navMeshAgent.speed = cur_moveSpeed;
     }
+    
+    IEnumerator DotDamage(int repeatTime,float damage)
+    {
+        poisonLock = false;
 
+        DecreaseHp(damage);
+        yield return new WaitForSeconds(1f);
+        poisonLock = true;
+        
+        if (repeatTime > 0&&cur_hp>5)
+        {
+            repeatTime--;
+            StartCoroutine (DotDamage(repeatTime, damage));
+        }
+
+    }
 
     void StartWalkingAnimation()
     {
