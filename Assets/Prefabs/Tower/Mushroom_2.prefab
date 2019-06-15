@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7337a97696cd2946a8c0f1603136691, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityType: 0
+  entityType: 1
   id: 0
   HP: 0
   DAMAGE: 0

@@ -127,7 +127,7 @@ public class Enemy : BaseGameEntity
             repeatTime--;
             StartCoroutine (DotDamage(repeatTime, damage));
         }
-        GetComponent<Renderer>().material.color = GetComponent<Renderer>().material.color - Color.green;
+
     }
 
     void StartWalkingAnimation()
