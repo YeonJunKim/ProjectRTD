@@ -60,6 +60,7 @@ MonoBehaviour:
   cur_attkRange: 0
   cur_attkSpeed: 0
   cur_moveSpeed: 0
+  cur_dotDamge: 0
   towerType: 0
   projectileType: 0
 --- !u!65 &8087653421617354446

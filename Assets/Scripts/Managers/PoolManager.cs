@@ -11,11 +11,26 @@ public enum EntityType
 
 public enum EnemyType
 {
+    //ㅣevel 1
     Wolf_1,
     KingCobra_1,
     GiantBee_1,
     Magma_1,
     Golem_1,
+
+    //ㅣevel 2
+    Wolf_2,
+    KingCobra_2,
+    GiantBee_2,
+    Magma_2,
+    Golem_2,
+
+    //ㅣevel 3
+    Wolf_3,
+    KingCobra_3,
+    GiantBee_3,
+    Magma_3,
+    Golem_3,
 };
 
 public enum TowerType

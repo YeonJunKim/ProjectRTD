@@ -15,7 +15,7 @@ public class Enemy : BaseGameEntity
     const float acceleration = 30;     // make it fast enough to turn quickly
 
     Healthbar healthbar;
-    bool poisonLock = true;
+    bool poisonLock;
 
     protected override void Awake()
     {
@@ -40,6 +40,7 @@ public class Enemy : BaseGameEntity
     {
         base.OnCreate();
         healthbar.UpdateHealthbar(HP, cur_hp);
+        poisonLock = true;
     }
 
     public override void OnDeath()
@@ -121,8 +122,8 @@ public class Enemy : BaseGameEntity
         DecreaseHp(damage);
         yield return new WaitForSeconds(1f);
         poisonLock = true;
-        
-        if (repeatTime > 0&&cur_hp>5)
+
+        if (repeatTime > 0 && cur_hp > cur_dotDamge)
         {
             repeatTime--;
             StartCoroutine (DotDamage(repeatTime, damage));

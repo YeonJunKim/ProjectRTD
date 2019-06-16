@@ -28,6 +28,7 @@ public class Buffer
             attkSpeed = 1;
         if (Mathf.Approximately(moveSpeed, 0))
             moveSpeed = 1;
+
         dotDamge = 0;
     }
 

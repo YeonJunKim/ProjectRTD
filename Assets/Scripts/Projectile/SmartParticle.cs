@@ -21,11 +21,13 @@ public class SmartParticle : MonoBehaviour
             {
                 Destroy(gameObject);
             }
-        }
-
-        if(target != null)
-        {
-            transform.position = target.position;
+            if (target != null)
+            {
+                if (target.gameObject.activeInHierarchy)
+                    transform.position = target.position;
+                else
+                    Destroy(gameObject);
+            }
         }
     }
 

@@ -16,10 +16,10 @@ public class GameManager : MonoBehaviour
     const float TIME_BETWEEN_SPAWNS = 0.5f;
     float nextSpawnTime;
 
-    const int SPAWN_AMOUNT_PER_WAVE = 5;
+    const int SPAWN_AMOUNT_PER_WAVE = 30;
     int countSpawn;
 
-    const float TIME_BETWEEN_WAVES = 5;
+    const float TIME_BETWEEN_WAVES = 21;
     float nextWaveTime;
     int nextEnemyType;
 
@@ -27,11 +27,14 @@ public class GameManager : MonoBehaviour
     int playerMoney;
     public static int MONEY_FOR_TOWER_DRAW = 50;
     public static int MONEY_FOR_TOWER_UPGRADE = 100;
-    const int moneyByStageLevel = 5;
+    const int moneyByStageLevel = 1;
+    const int defaultMoneyByStage = 3;
     const int startMoney = 9999;
 
     int stageLevel;
     bool increaseStageLevel;    // not to increase stage level at level 1
+
+    int nextBossStage;
 
     private void Awake()
     {
@@ -56,6 +59,7 @@ public class GameManager : MonoBehaviour
         stageLevel = 1;
         UIManager.S.SetStageLevel(stageLevel);
         increaseStageLevel = false;
+        nextBossStage = 6;
     }
 
     // Update is called once per frame
@@ -71,29 +75,34 @@ public class GameManager : MonoBehaviour
             IncreaseLife(0.25f);
         }
 
-        if(spawnOn && nextSpawnTime < Time.time)
+        if(stageLevel == nextBossStage)
         {
             Enemy enemyN = EntityManager.S.GetEntity((EnemyType)nextEnemyType) as Enemy;
             enemyN.transform.position = spawnPoint_N.position;
             enemyN.transform.Translate(0, 0.5f, 0); // for enemy to be on NavMesh
             enemyN.SetDestination(spawnPoint_S.position);
 
-
-            // thinking of having monsters just spawn in one side
-            //Enemy enemyS = EntityManager.S.GetEntity((EnemyType)nextEnemyType) as Enemy;
-            //enemyS.transform.position = spawnPoint_S.position;
-            //enemyS.transform.Translate(0, 0.5f, 0); // for enemy to be on NavMesh
-            //enemyS.SetDestination(spawnPoint_N.position);
-
-            countSpawn++;
-            nextSpawnTime = Time.time + TIME_BETWEEN_SPAWNS;
-
-            if(countSpawn >= SPAWN_AMOUNT_PER_WAVE)
+            nextBossStage += nextBossStage;
+        }
+        else
+        {
+            if (spawnOn && nextSpawnTime < Time.time)
             {
-                spawnOn = false;
-                nextEnemyType++;
-                nextEnemyType = (int)Mathf.Repeat(nextEnemyType, System.Enum.GetNames(typeof(EnemyType)).Length);
-                countSpawn = 0;
+                Enemy enemyN = EntityManager.S.GetEntity((EnemyType)nextEnemyType) as Enemy;
+                enemyN.transform.position = spawnPoint_N.position;
+                enemyN.transform.Translate(0, 0.5f, 0); // for enemy to be on NavMesh
+                enemyN.SetDestination(spawnPoint_S.position);
+
+                countSpawn++;
+                nextSpawnTime = Time.time + TIME_BETWEEN_SPAWNS;
+
+                if (countSpawn >= SPAWN_AMOUNT_PER_WAVE)
+                {
+                    spawnOn = false;
+                    nextEnemyType++;
+                    nextEnemyType = (int)Mathf.Repeat(nextEnemyType, System.Enum.GetNames(typeof(EnemyType)).Length);
+                    countSpawn = 0;
+                }
             }
         }
     }
@@ -112,7 +121,7 @@ public class GameManager : MonoBehaviour
 
     public void IncreaseMoneyByStageLevel()
     {
-        IncreaseMoney(stageLevel * moneyByStageLevel);
+        IncreaseMoney(defaultMoneyByStage + stageLevel * moneyByStageLevel);
     }
 
     public void IncreaseMoney(int amount)

@@ -10,12 +10,12 @@ public class Tower_Mushroom : Tower
     public int mushRoomLifetime;
 
     bool setBuff = true;
+
     protected override void Update()
     {
-        List<Enemy> enemies = radarSystem.GetEnemyList();
-
         if (setBuff)
         {
+            List<Enemy> enemies = radarSystem.GetEnemyList();
             setBuff = false;
             if (enemies.Count != 0)
             {
@@ -37,11 +37,13 @@ public class Tower_Mushroom : Tower
             StartCoroutine("SetBuffwaiting");
         }
     }
+
     IEnumerator SetBuffwaiting()
     {
         yield return new WaitForSeconds(1f);
         setBuff = true;
     }
+
     protected override void SetAnimation_Idle()
     {
         animator.speed = 1;

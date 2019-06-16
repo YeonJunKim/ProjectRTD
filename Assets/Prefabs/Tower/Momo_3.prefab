@@ -52,7 +52,7 @@ MonoBehaviour:
   entityType: 1
   id: 0
   HP: 0
-  DAMAGE: 800
+  DAMAGE: 450
   ARMOR: 0
   ATTK_RANGE: 15
   ATTK_SPEED: 2.5
@@ -63,6 +63,7 @@ MonoBehaviour:
   cur_attkRange: 0
   cur_attkSpeed: 0
   cur_moveSpeed: 0
+  cur_dotDamge: 0
   towerType: 17
   projectileType: 6
   charge1: {fileID: 1057079023899272826}
@@ -93,7 +94,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 856341df429f6104b82b137c25aed482, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0

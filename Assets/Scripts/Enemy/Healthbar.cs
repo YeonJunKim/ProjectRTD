@@ -33,6 +33,8 @@ public class Healthbar : MonoBehaviour
 
         float ratio = curHP / originalHP;
         float scaleX = originalScale.x * ratio;
+        if (scaleX < 0.1f)
+            scaleX = 0.1f;
         healthBar.transform.localScale = new Vector3(scaleX, originalScale.y, originalScale.z);
     }
 }

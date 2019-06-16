@@ -37,11 +37,15 @@ public class Projectile_Bullet : Projectile_Base
             {
                 // only update the target's position when the target is alive
                 // (to prevent setting the position when the target goes back to the pool) 
-                if (target.gameObject.activeInHierarchy)
+                if (target != null && target.gameObject.activeInHierarchy)
                 {
                     targetPos = target.position;
                     targetPos.y += 0.5f; // move it a little bit up to see it above ground;
                     LookAt_Yaxis(targetPos);
+                }
+                else
+                {
+                    target = null;
                 }
                 transform.position = Vector3.Lerp(startPos, targetPos, progress);
             }
@@ -53,7 +57,7 @@ public class Projectile_Bullet : Projectile_Base
     void OnTargetHit()
     {
         // the target could already be dead.. check..
-        if (target.gameObject.activeInHierarchy)
+        if (target != null && target.gameObject.activeInHierarchy)
         {
             BaseGameEntity targetEntity = target.GetComponent<BaseGameEntity>();
             targetEntity.DecreaseHp(cur_damage);

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1221421480822784393}
   - component: {fileID: 360557434}
   m_Layer: 0
-  m_Name: Laser
+  m_Name: Laser_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,6 +58,7 @@ MonoBehaviour:
   cur_attkRange: 0
   cur_attkSpeed: 0
   cur_moveSpeed: 0
+  cur_dotDamge: 0
   type: 4
   isBufferUsed: 0
   buffer:
@@ -68,6 +69,7 @@ MonoBehaviour:
     attkRange: 0
     attkSpeed: 0
     moveSpeed: 0
+    dotDamge: 0
     cur_LifeTime: 0
 --- !u!1 &1176535854410933269
 GameObject:
@@ -457,7 +459,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 0
       maxCurve:
@@ -510,7 +512,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 0
       maxCurve:

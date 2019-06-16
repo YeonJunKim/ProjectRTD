@@ -2280,9 +2280,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entityType: 0
   id: 0
-  HP: 160
+  HP: 300
   DAMAGE: 0
-  ARMOR: 2
+  ARMOR: 3
   ATTK_RANGE: 0
   ATTK_SPEED: 0
   MOVE_SPEED: 3
@@ -2292,6 +2292,7 @@ MonoBehaviour:
   cur_attkRange: 0
   cur_attkSpeed: 0
   cur_moveSpeed: 0
+  cur_dotDamge: 0
   enemyType: 4
 --- !u!65 &7800495319427914409
 BoxCollider:
