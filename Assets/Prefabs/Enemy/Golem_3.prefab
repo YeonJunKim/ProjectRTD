@@ -51,7 +51,7 @@ MonoBehaviour:
   id: 0
   HP: 2500
   DAMAGE: 0
-  ARMOR: 15
+  ARMOR: 18
   ATTK_RANGE: 0
   ATTK_SPEED: 0
   MOVE_SPEED: 5
@@ -62,7 +62,7 @@ MonoBehaviour:
   cur_attkSpeed: 0
   cur_moveSpeed: 0
   cur_dotDamge: 0
-  enemyType: 14
+  enemyType: 16
 --- !u!65 &2872397870674621093
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -184,7 +184,7 @@ MonoBehaviour:
   cur_attkSpeed: 0
   cur_moveSpeed: 0
   cur_dotDamge: 0
-  enemyType: 10
+  enemyType: 12
 --- !u!65 &5513892093098230035
 BoxCollider:
   m_ObjectHideFlags: 0

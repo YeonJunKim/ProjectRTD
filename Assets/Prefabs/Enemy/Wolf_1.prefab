@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entityType: 0
   id: 0
-  HP: 4000
+  HP: 40
   DAMAGE: 0
   ARMOR: 0
   ATTK_RANGE: 0

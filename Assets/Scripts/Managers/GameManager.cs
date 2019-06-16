@@ -16,10 +16,10 @@ public class GameManager : MonoBehaviour
     const float TIME_BETWEEN_SPAWNS = 0.5f;
     float nextSpawnTime;
 
-    const int SPAWN_AMOUNT_PER_WAVE = 30;
+    const int SPAWN_AMOUNT_PER_WAVE = 1;
     int countSpawn;
 
-    const float TIME_BETWEEN_WAVES = 21;
+    const float TIME_BETWEEN_WAVES = 2;
     float nextWaveTime;
     int nextEnemyType;
 
@@ -74,34 +74,40 @@ public class GameManager : MonoBehaviour
             IncreaseStageLevel();
             IncreaseLife(0.25f);
         }
-
-        if(stageLevel == nextBossStage)
+        
+        if(spawnOn && stageLevel < 19)
         {
-            Enemy enemyN = EntityManager.S.GetEntity((EnemyType)nextEnemyType) as Enemy;
-            enemyN.transform.position = spawnPoint_N.position;
-            enemyN.transform.Translate(0, 0.5f, 0); // for enemy to be on NavMesh
-            enemyN.SetDestination(spawnPoint_S.position);
-
-            nextBossStage += nextBossStage;
-        }
-        else
-        {
-            if (spawnOn && nextSpawnTime < Time.time)
+            if (stageLevel == nextBossStage)
             {
                 Enemy enemyN = EntityManager.S.GetEntity((EnemyType)nextEnemyType) as Enemy;
                 enemyN.transform.position = spawnPoint_N.position;
                 enemyN.transform.Translate(0, 0.5f, 0); // for enemy to be on NavMesh
                 enemyN.SetDestination(spawnPoint_S.position);
 
-                countSpawn++;
-                nextSpawnTime = Time.time + TIME_BETWEEN_SPAWNS;
-
-                if (countSpawn >= SPAWN_AMOUNT_PER_WAVE)
+                nextBossStage += nextBossStage;
+                nextEnemyType++;
+                nextEnemyType = (int)Mathf.Repeat(nextEnemyType, System.Enum.GetNames(typeof(EnemyType)).Length);
+                spawnOn = false;
+            }
+            else
+            {
+                if (nextSpawnTime < Time.time)
                 {
-                    spawnOn = false;
-                    nextEnemyType++;
-                    nextEnemyType = (int)Mathf.Repeat(nextEnemyType, System.Enum.GetNames(typeof(EnemyType)).Length);
-                    countSpawn = 0;
+                    Enemy enemyN = EntityManager.S.GetEntity((EnemyType)nextEnemyType) as Enemy;
+                    enemyN.transform.position = spawnPoint_N.position;
+                    enemyN.transform.Translate(0, 0.5f, 0); // for enemy to be on NavMesh
+                    enemyN.SetDestination(spawnPoint_S.position);
+
+                    countSpawn++;
+                    nextSpawnTime = Time.time + TIME_BETWEEN_SPAWNS;
+
+                    if (countSpawn >= SPAWN_AMOUNT_PER_WAVE)
+                    {
+                        nextEnemyType++;
+                        nextEnemyType = (int)Mathf.Repeat(nextEnemyType, System.Enum.GetNames(typeof(EnemyType)).Length);
+                        countSpawn = 0;
+                        spawnOn = false;
+                    }
                 }
             }
         }

@@ -40,10 +40,16 @@ public class SmartCamera : MonoBehaviour
         {
             EnemyType enemyType = _target.GetComponent<Enemy>().enemyType;
 
-            if(enemyType == EnemyType.Golem_1)
+            if(enemyType == EnemyType.Boss_1 || enemyType == EnemyType.Boss_2 || enemyType == EnemyType.Boss_3)
             {
                 transform.Translate(_target.forward * 3f);
                 transform.Translate(_target.up * 2f);
+                lookAtPos.y += 1f;
+            }
+            else if (enemyType == EnemyType.Golem_1 || enemyType == EnemyType.Golem_2 || enemyType == EnemyType.Golem_3)
+            {
+                transform.Translate(_target.forward * 2f);
+                transform.Translate(_target.up * 1.5f);
                 lookAtPos.y += 1f;
             }
             else
@@ -56,7 +62,10 @@ public class SmartCamera : MonoBehaviour
         else
         {
             TowerType towerType = _target.GetComponent<Tower>().towerType;
-            if (towerType == TowerType.Chick_1 || towerType == TowerType.Chick_2 || towerType == TowerType.Penguin_1 )
+            if (towerType == TowerType.Chick_1 || towerType == TowerType.Chick_2 || towerType == TowerType.Chick_3 
+                || towerType == TowerType.Penguin_1 || towerType == TowerType.Penguin_2 || towerType == TowerType.Penguin_3
+                || towerType == TowerType.LittleBoar_1 || towerType == TowerType.Momo_1 || towerType == TowerType.Momo_2
+                || towerType == TowerType.Mushroom_1 || towerType == TowerType.Mushroom_2 || towerType == TowerType.Dragon_1)
             {
                 transform.Translate(_target.forward * 1.5f);
                 transform.Translate(_target.up * 1f);

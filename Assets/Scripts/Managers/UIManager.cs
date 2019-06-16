@@ -170,6 +170,58 @@ public class UIManager : MonoBehaviour
                 info_name.text = "Lv1 골렘";
                 info_ps.text = "..";
                 break;
+            case EnemyType.Wolf_2:
+                info_name.text = "Lv2 늑대";
+                info_ps.text = "으르르..";
+                break;
+            case EnemyType.KingCobra_2:
+                info_name.text = "Lv2 킹코브라";
+                info_ps.text = "스스스..";
+                break;
+            case EnemyType.GiantBee_2:
+                info_name.text = "Lv2 여왕벌";
+                info_ps.text = "위이잉~";
+                break;
+            case EnemyType.Magma_2:
+                info_name.text = "Lv2 마그마";
+                info_ps.text = "보글보글..";
+                break;
+            case EnemyType.Golem_2:
+                info_name.text = "Lv2 골렘";
+                info_ps.text = "..";
+                break;
+            case EnemyType.Wolf_3:
+                info_name.text = "Lv3 늑대";
+                info_ps.text = "으르르..";
+                break;
+            case EnemyType.KingCobra_3:
+                info_name.text = "Lv3 킹코브라";
+                info_ps.text = "스스스..";
+                break;
+            case EnemyType.GiantBee_3:
+                info_name.text = "Lv3 여왕벌";
+                info_ps.text = "위이잉~";
+                break;
+            case EnemyType.Magma_3:
+                info_name.text = "Lv3 마그마";
+                info_ps.text = "보글보글..";
+                break;
+            case EnemyType.Golem_3:
+                info_name.text = "Lv3 골렘";
+                info_ps.text = "..";
+                break;
+            case EnemyType.Boss_1:
+                info_name.text = "스텀프 (보스)";
+                info_ps.text = "아이 엠 그루트..";
+                break;
+            case EnemyType.Boss_2:
+                info_name.text = "스파이더왕 (보스)";
+                info_ps.text = "물리면 스파이더맨 됨";
+                break;
+            case EnemyType.Boss_3:
+                info_name.text = "드래곤 (보스)";
+                info_ps.text = "크와아아아ㅏ!!";
+                break;
         }
         info_enemy_hp.text = ((int)enemy._HP).ToString();
         info_enemy_armor.text = ((int)enemy._ARMOR).ToString();

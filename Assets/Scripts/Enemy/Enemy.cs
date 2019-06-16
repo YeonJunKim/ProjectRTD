@@ -150,6 +150,45 @@ public class Enemy : BaseGameEntity
             case EnemyType.Golem_1:
                 animator.SetBool("Walk Forward", true);
                 break;
+            case EnemyType.Wolf_2:
+                animator.SetBool("Run Forward", true);
+                break;
+            case EnemyType.KingCobra_2:
+                animator.SetBool("Slither Forward", true);
+                break;
+            case EnemyType.GiantBee_2:
+                animator.SetBool("Fly Forward", true);
+                break;
+            case EnemyType.Magma_2:
+                animator.SetBool("Move Forward", true);
+                break;
+            case EnemyType.Golem_2:
+                animator.SetBool("Walk Forward", true);
+                break;
+            case EnemyType.Wolf_3:
+                animator.SetBool("Run Forward", true);
+                break;
+            case EnemyType.KingCobra_3:
+                animator.SetBool("Slither Forward", true);
+                break;
+            case EnemyType.GiantBee_3:
+                animator.SetBool("Fly Forward", true);
+                break;
+            case EnemyType.Magma_3:
+                animator.SetBool("Move Forward", true);
+                break;
+            case EnemyType.Golem_3:
+                animator.SetBool("Walk Forward", true);
+                break;
+            case EnemyType.Boss_1:
+                animator.SetBool("Walk Forward", true);
+                break;
+            case EnemyType.Boss_2:
+                animator.SetBool("Move Forward Slow", true);
+                break;
+            case EnemyType.Boss_3:
+                animator.SetBool("Walk Forward", true);
+                break;
         }
     }
 }

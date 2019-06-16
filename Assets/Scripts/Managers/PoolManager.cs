@@ -17,6 +17,7 @@ public enum EnemyType
     GiantBee_1,
     Magma_1,
     Golem_1,
+    Boss_1,
 
     //ㅣevel 2
     Wolf_2,
@@ -24,6 +25,7 @@ public enum EnemyType
     GiantBee_2,
     Magma_2,
     Golem_2,
+    Boss_2,
 
     //ㅣevel 3
     Wolf_3,
@@ -31,6 +33,7 @@ public enum EnemyType
     GiantBee_3,
     Magma_3,
     Golem_3,
+    Boss_3,
 };
 
 public enum TowerType

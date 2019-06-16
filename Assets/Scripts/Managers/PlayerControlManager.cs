@@ -96,6 +96,7 @@ public class PlayerControlManager : MonoBehaviour
                     prePlacer.SetActive(false);
                     prePlacer.GetComponent<PrePlacer>().Init();
                     ChangeState(PlayerControlState.Idle);
+                    SoundManager.S.ClickSound();
                 }
             }
         }
@@ -160,6 +161,7 @@ public class PlayerControlManager : MonoBehaviour
         randomSelectedTower = RandomTowerDraw();
         GameManager.S.DecreaseMoney(GameManager.MONEY_FOR_TOWER_DRAW);
         ChangeState(PlayerControlState.PlacingTower);
+        SoundManager.S.ClickSound();
     }
 
     public TowerType GetRandomSelectedTower()
@@ -214,6 +216,11 @@ public class PlayerControlManager : MonoBehaviour
         if (state != PlayerControlState.TowerSelected || selectedEntity == null)
             return;
 
+        int towerType = (int)((Tower)selectedEntity).towerType;
+        // return if tower level is 3
+        if (towerType >= 12)
+            return;
+
         if (GameManager.S.GetMoney() < GameManager.MONEY_FOR_TOWER_UPGRADE)
             return;
 
@@ -233,6 +240,7 @@ public class PlayerControlManager : MonoBehaviour
         UIManager.S.ShowInfoView(selectedEntity);
 
         GameManager.S.DecreaseMoney(GameManager.MONEY_FOR_TOWER_UPGRADE);
+        SoundManager.S.ClickSound();
     }
 
     List<Tower> FindClosestSameTowersFromSelectedTower()
@@ -286,7 +294,7 @@ public class PlayerControlManager : MonoBehaviour
         chances.Add(TowerType.LittleBoar_1, 30);
         chances.Add(TowerType.Dragon_1, 20);
         chances.Add(TowerType.Penguin_1, 10);
-        chances.Add(TowerType.Mushroom_1, 2);
+        chances.Add(TowerType.Mushroom_1, 1);
         chances.Add(TowerType.Momo_1, 10);
 
         int sum = 0;
