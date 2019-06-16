@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
                 enemyN.transform.Translate(0, 0.5f, 0); // for enemy to be on NavMesh
                 enemyN.SetDestination(spawnPoint_S.position);
 
-                nextBossStage += nextBossStage;
+                nextBossStage += 6;
                 nextEnemyType++;
                 nextEnemyType = (int)Mathf.Repeat(nextEnemyType, System.Enum.GetNames(typeof(EnemyType)).Length);
                 spawnOn = false;

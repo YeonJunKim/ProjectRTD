@@ -238,7 +238,7 @@ public class UIManager : MonoBehaviour
                 break;
             case TowerType.LittleBoar_1:
                 info_name.text = "Lv1 리틀호그";
-                info_ps.text = "호잉호잉~";
+                info_ps.text = "꿀꿀";
                 break;
             case TowerType.Dragon_1:
                 info_name.text = "Lv1 용용이";
@@ -246,7 +246,7 @@ public class UIManager : MonoBehaviour
                 break;
             case TowerType.Penguin_1:
                 info_name.text = "Lv1 펭귄이";
-                info_ps.text = "프렐요드를 위하여";
+                info_ps.text = "렛잇고~";
                 break;
             case TowerType.Mushroom_1:
                 info_name.text = "Lv1 머슈룸";
@@ -262,7 +262,7 @@ public class UIManager : MonoBehaviour
                 break;
             case TowerType.LittleBoar_2:
                 info_name.text = "Lv2 리틀호그";
-                info_ps.text = "호잉호잉~";
+                info_ps.text = "꿀꿀";
                 break;
             case TowerType.Dragon_2:
                 info_name.text = "Lv2 용용이";
@@ -270,7 +270,7 @@ public class UIManager : MonoBehaviour
                 break;
             case TowerType.Penguin_2:
                 info_name.text = "Lv2 펭귄이";
-                info_ps.text = "프렐요드를 위하여";
+                info_ps.text = "렛잇고~";
                 break;
             case TowerType.Mushroom_2:
                 info_name.text = "Lv2 머슈룸";
@@ -286,7 +286,7 @@ public class UIManager : MonoBehaviour
                 break;
             case TowerType.LittleBoar_3:
                 info_name.text = "Lv3 리틀호그";
-                info_ps.text = "호잉호잉~";
+                info_ps.text = "꿀꿀";
                 break;
             case TowerType.Dragon_3:
                 info_name.text = "Lv3 용용이";
@@ -294,7 +294,7 @@ public class UIManager : MonoBehaviour
                 break;
             case TowerType.Penguin_3:
                 info_name.text = "Lv3 펭귄이";
-                info_ps.text = "프렐요드를 위하여";
+                info_ps.text = "렛잇고~";
                 break;
             case TowerType.Mushroom_3:
                 info_name.text = "Lv3 머슈룸";

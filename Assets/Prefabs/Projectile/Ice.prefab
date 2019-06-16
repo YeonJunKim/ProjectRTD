@@ -63,7 +63,7 @@ MonoBehaviour:
   isBufferUsed: 1
   buffer:
     isAlive: 0
-    lifeTime: 5
+    lifeTime: 3
     damage: 0
     armor: 0
     attkRange: 0

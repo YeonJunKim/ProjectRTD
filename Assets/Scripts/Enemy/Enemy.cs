@@ -50,7 +50,7 @@ public class Enemy : BaseGameEntity
         Destroy(navMeshAgent);
 
         if(enemyType == EnemyType.Boss_1 || enemyType == EnemyType.Boss_2 || enemyType == EnemyType.Boss_3)
-            GameManager.S.IncreaseMoneyByStageLevel();
+            GameManager.S.IncreaseMoneyBossStageLevel();
         else
             GameManager.S.IncreaseMoneyByStageLevel();
     }

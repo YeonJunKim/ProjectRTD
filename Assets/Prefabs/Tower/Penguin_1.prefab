@@ -49,7 +49,7 @@ MonoBehaviour:
   entityType: 1
   id: 0
   HP: 0
-  DAMAGE: 5
+  DAMAGE: 15
   ARMOR: 0
   ATTK_RANGE: 7
   ATTK_SPEED: 0.8
@@ -60,6 +60,7 @@ MonoBehaviour:
   cur_attkRange: 0
   cur_attkSpeed: 0
   cur_moveSpeed: 0
+  cur_dotDamge: 0
   towerType: 3
   projectileType: 3
 --- !u!65 &3927909902421390301
