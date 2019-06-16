@@ -22,13 +22,19 @@ public class SoundManager : MonoBehaviour
     public AudioClip bossSpawned;
     public AudioClip click;
 
+    BG_TYPE cur_bg;
+
     private void Awake()
     {
         S = this;
+        cur_bg = BG_TYPE.Intro;
     }
 
     public void ChangeBGSound(BG_TYPE bgType)
     {
+        if (cur_bg == bgType)
+            return;
+
         BG_AudioSource.Stop();
         switch (bgType)
         {
@@ -43,6 +49,7 @@ public class SoundManager : MonoBehaviour
                 break;
         }
         BG_AudioSource.Play();
+        cur_bg = bgType;
     }
 
     public void ClickSound()

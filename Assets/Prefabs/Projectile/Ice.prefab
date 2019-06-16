@@ -51,7 +51,7 @@ MonoBehaviour:
   ARMOR: 0
   ATTK_RANGE: 0
   ATTK_SPEED: 0
-  MOVE_SPEED: 0.6
+  MOVE_SPEED: 0.4
   cur_hp: 0
   cur_damage: 0
   cur_armor: 0

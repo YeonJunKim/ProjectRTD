@@ -25,9 +25,9 @@ public class Tower_Mushroom : Tower
                 Dotbuf.lifeTime = mushRoomLifetime;
                 Dotbuf.dotDamge = mushRoomDotdamage;
 
-                foreach (Enemy enemy in enemies)
+                for (int i = 0; i < enemies.Count; i++)
                 {
-                    enemy.RegisterBuffer(Dotbuf);
+                    enemies[i].RegisterBuffer(Dotbuf);
                 }
             }
             else

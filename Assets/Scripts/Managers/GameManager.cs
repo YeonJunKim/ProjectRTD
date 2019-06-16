@@ -16,10 +16,10 @@ public class GameManager : MonoBehaviour
     const float TIME_BETWEEN_SPAWNS = 0.5f;
     float nextSpawnTime;
 
-    const int SPAWN_AMOUNT_PER_WAVE = 1;
+    const int SPAWN_AMOUNT_PER_WAVE = 20;
     int countSpawn;
 
-    const float TIME_BETWEEN_WAVES = 2;
+    const float TIME_BETWEEN_WAVES = 31;
     float nextWaveTime;
     int nextEnemyType;
 
@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     public static int MONEY_FOR_TOWER_UPGRADE = 100;
     const int moneyByStageLevel = 1;
     const int defaultMoneyByStage = 3;
-    const int startMoney = 9999;
+    const int startMoney = 300;
 
     int stageLevel;
     bool increaseStageLevel;    // not to increase stage level at level 1
@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //nextSpawnTime = TIME_BETWEEN_WAVES;
+        nextSpawnTime = 20;
         nextSpawnTime = 1f; // for testing
         countSpawn = 0;
         nextWaveTime = Time.time;
@@ -60,6 +60,8 @@ public class GameManager : MonoBehaviour
         UIManager.S.SetStageLevel(stageLevel);
         increaseStageLevel = false;
         nextBossStage = 6;
+
+        SoundManager.S.ChangeBGSound(BG_TYPE.InGame);
     }
 
     // Update is called once per frame
@@ -88,6 +90,8 @@ public class GameManager : MonoBehaviour
                 nextEnemyType++;
                 nextEnemyType = (int)Mathf.Repeat(nextEnemyType, System.Enum.GetNames(typeof(EnemyType)).Length);
                 spawnOn = false;
+                nextWaveTime += 10; // give a bit more time at boss stage
+                SoundManager.S.ChangeBGSound(BG_TYPE.BossSpawned);
             }
             else
             {
@@ -108,6 +112,7 @@ public class GameManager : MonoBehaviour
                         countSpawn = 0;
                         spawnOn = false;
                     }
+                    SoundManager.S.ChangeBGSound(BG_TYPE.InGame);
                 }
             }
         }

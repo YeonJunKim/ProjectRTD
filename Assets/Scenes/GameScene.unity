@@ -262,7 +262,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -370.5, y: 200}
+  m_AnchoredPosition: {x: -376.4, y: 200}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &58515601
@@ -3067,7 +3067,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -3345,8 +3345,8 @@ MonoBehaviour:
   BG_AudioSource: {fileID: 1031076705}
   Effect_AudioSource: {fileID: 856527364}
   intro: {fileID: 0}
-  inGame: {fileID: 0}
-  bossSpawned: {fileID: 0}
+  inGame: {fileID: 8300000, guid: 70cf334cbc1d3ea42883763eefeeff4f, type: 3}
+  bossSpawned: {fileID: 8300000, guid: c202582f3f3dd4c43b7dd8d017b9cc49, type: 3}
   click: {fileID: 8300000, guid: f61e93ee987c29e4e974463363fe5c64, type: 3}
 --- !u!1 &1168093336
 GameObject:
