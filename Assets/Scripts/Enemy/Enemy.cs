@@ -48,6 +48,11 @@ public class Enemy : BaseGameEntity
         base.OnDeath();
         EntityManager.S.OnEnemyDeath(this);
         Destroy(navMeshAgent);
+
+        if(enemyType == EnemyType.Boss_1 || enemyType == EnemyType.Boss_2 || enemyType == EnemyType.Boss_3)
+            GameManager.S.IncreaseMoneyByStageLevel();
+        else
+            GameManager.S.IncreaseMoneyByStageLevel();
     }
 
     // when this entity is attacked
@@ -59,7 +64,6 @@ public class Enemy : BaseGameEntity
         if (cur_hp <= 0)
         {
             healthbar.UpdateHealthbar(HP, 0);
-            GameManager.S.IncreaseMoneyByStageLevel();
             OnDeath();
         }
         else

@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     const int SPAWN_AMOUNT_PER_WAVE = 20;
     int countSpawn;
 
-    const float TIME_BETWEEN_WAVES = 31;
+    const float TIME_BETWEEN_WAVES = 21;
     float nextWaveTime;
     int nextEnemyType;
 
@@ -29,12 +29,16 @@ public class GameManager : MonoBehaviour
     public static int MONEY_FOR_TOWER_UPGRADE = 100;
     const int moneyByStageLevel = 1;
     const int defaultMoneyByStage = 3;
+    const int defaultMoneyBossStage = 100;
     const int startMoney = 300;
 
     int stageLevel;
     bool increaseStageLevel;    // not to increase stage level at level 1
 
     int nextBossStage;
+
+    bool isBossAlive;            // for changing the BGM when the boss is dead
+    BaseGameEntity boss;
 
     private void Awake()
     {
@@ -44,10 +48,9 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        nextSpawnTime = 20;
-        nextSpawnTime = 1f; // for testing
+        nextSpawnTime = 0;
         countSpawn = 0;
-        nextWaveTime = Time.time;
+        nextWaveTime = Time.time + 20;
         spawnOn = false;
         nextEnemyType = 0;
 
@@ -61,7 +64,7 @@ public class GameManager : MonoBehaviour
         increaseStageLevel = false;
         nextBossStage = 6;
 
-        SoundManager.S.ChangeBGSound(BG_TYPE.InGame);
+        isBossAlive = false;
     }
 
     // Update is called once per frame
@@ -72,7 +75,7 @@ public class GameManager : MonoBehaviour
         if (nextWaveTime < Time.time)
         {
             spawnOn = true;
-            nextWaveTime = Time.time + TIME_BETWEEN_WAVES;
+            nextWaveTime = Time.time + TIME_BETWEEN_WAVES + stageLevel;
             IncreaseStageLevel();
             IncreaseLife(0.25f);
         }
@@ -90,8 +93,10 @@ public class GameManager : MonoBehaviour
                 nextEnemyType++;
                 nextEnemyType = (int)Mathf.Repeat(nextEnemyType, System.Enum.GetNames(typeof(EnemyType)).Length);
                 spawnOn = false;
-                nextWaveTime += 10; // give a bit more time at boss stage
+                nextWaveTime += 10 + stageLevel; // give a bit more time at boss stage
                 SoundManager.S.ChangeBGSound(BG_TYPE.BossSpawned);
+                isBossAlive = true;
+                boss = enemyN;
             }
             else
             {
@@ -112,8 +117,17 @@ public class GameManager : MonoBehaviour
                         countSpawn = 0;
                         spawnOn = false;
                     }
-                    SoundManager.S.ChangeBGSound(BG_TYPE.InGame);
                 }
+            }
+        }
+
+        // to change the BGM when the boss is dead
+        if(isBossAlive)
+        {
+            if(boss.gameObject.activeInHierarchy == false)
+            {
+                SoundManager.S.ChangeBGSound(BG_TYPE.InGame);
+                isBossAlive = false;
             }
         }
     }
@@ -133,6 +147,11 @@ public class GameManager : MonoBehaviour
     public void IncreaseMoneyByStageLevel()
     {
         IncreaseMoney(defaultMoneyByStage + stageLevel * moneyByStageLevel);
+    }
+
+    public void IncreaseMoneyBossStageLevel()
+    {
+        IncreaseMoney(defaultMoneyBossStage * stageLevel / 6);
     }
 
     public void IncreaseMoney(int amount)
