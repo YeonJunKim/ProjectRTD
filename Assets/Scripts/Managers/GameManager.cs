@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     const int SPAWN_AMOUNT_PER_WAVE = 20;
     int countSpawn;
 
-    const float TIME_BETWEEN_WAVES = 21;
+    const float TIME_BETWEEN_WAVES = 41;
     float nextWaveTime;
     int nextEnemyType;
 
@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     const int moneyByStageLevel = 1;
     const int defaultMoneyByStage = 3;
     const int defaultMoneyBossStage = 100;
-    const int startMoney = 300;
+    const int startMoney = 3000;
 
     int stageLevel;
     bool increaseStageLevel;    // not to increase stage level at level 1
@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
     {
         nextSpawnTime = 0;
         countSpawn = 0;
-        nextWaveTime = Time.time + 20;
+        nextWaveTime = Time.time + TIME_BETWEEN_WAVES;
         spawnOn = false;
         nextEnemyType = 0;
 
@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
         if (nextWaveTime < Time.time)
         {
             spawnOn = true;
-            nextWaveTime = Time.time + TIME_BETWEEN_WAVES + stageLevel;
+            nextWaveTime = Time.time + TIME_BETWEEN_WAVES;
             IncreaseStageLevel();
             IncreaseLife(0.25f);
         }
@@ -196,5 +196,11 @@ public class GameManager : MonoBehaviour
     public int GetMoney()
     {
         return playerMoney;
+    }
+
+    public void StartWave()
+    {
+        if(spawnOn == false)
+            nextWaveTime = 0;
     }
 }

@@ -31,6 +31,8 @@ public class PlayerControlManager : MonoBehaviour
 
     const int numOfLevel1Tower = 6;
 
+    bool firstIsAlwaysChick;
+
     private void Awake()
     {
         if (S == null)
@@ -38,6 +40,7 @@ public class PlayerControlManager : MonoBehaviour
 
         screenMoveDelta = Vector3.zero;
         selectedEntity = null;
+        firstIsAlwaysChick = true;
     }
 
     private void Start()
@@ -167,6 +170,12 @@ public class PlayerControlManager : MonoBehaviour
     public TowerType GetRandomSelectedTower()
     {
         return randomSelectedTower;
+    }
+
+    public void OnStartButton()
+    {
+        if(state == PlayerControlState.Idle)
+            GameManager.S.StartWave();
     }
 
     // for screen move
@@ -316,6 +325,13 @@ public class PlayerControlManager : MonoBehaviour
                 break;
             }
         }
+
+        if(firstIsAlwaysChick)
+        {
+            tower = TowerType.Chick_1;
+            firstIsAlwaysChick = false;
+        }
+
         return tower;
     }
 }
