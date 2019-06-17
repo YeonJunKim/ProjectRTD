@@ -8,6 +8,8 @@ TagManager:
   - Tower
   - Ground
   - Road
+  - Node
+  - Obstacle
   layers:
   - Default
   - TransparentFX
