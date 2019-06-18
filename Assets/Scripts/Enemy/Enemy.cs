@@ -17,22 +17,30 @@ public class Enemy : BaseGameEntity
     Healthbar healthbar;
     bool poisonLock;
 
+    Stack<Node> pathToGO;
+
+    public bool testingPathFinding;
+
     protected override void Awake()
     {
         base.Awake();
         animator = GetComponentInChildren<Animator>();
         healthbar = GetComponentInChildren<Healthbar>();
+        pathToGO = new Stack<Node>();
     }
 
     protected override void Update()
     {
-        base.Update();
-
-        float sqrDist = Vector3.SqrMagnitude(transform.position - destination);
-        if (sqrDist < 1)
+        if(!testingPathFinding)
         {
-            GameManager.S.DecreaseLife();
-            OnDeath();
+            base.Update();
+
+            float sqrDist = Vector3.SqrMagnitude(transform.position - destination);
+            if (sqrDist < 0.5f)
+            {
+                GameManager.S.DecreaseLife();
+                OnDeath();
+            }
         }
     }
 
@@ -74,14 +82,50 @@ public class Enemy : BaseGameEntity
 
     public void SetDestination(Vector3 pos)
     {
-        PutPerfectlyOnNavMesh();
+        //// unity navMesh version
+        //PutPerfectlyOnNavMesh();
+        //destination = pos;
+        //navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
+        //navMeshAgent.SetDestination(destination);
+        //StartWalkingAnimation();
+
+        // handmade A* algorithm version
         destination = pos;
-        navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
-        navMeshAgent.SetDestination(destination);
         StartWalkingAnimation();
     }
 
-    public void PutPerfectlyOnNavMesh()
+    // handmade A* algorithm version
+    public void SetPath(Stack<Node> path)
+    {
+        pathToGO = path;
+        StartWalkingAnimation();
+        StartCoroutine("StartMove");
+    }
+
+    IEnumerator StartMove()
+    {
+        while(pathToGO.Count != 0)
+        {
+            Vector3 targetPos = pathToGO.Pop().transform.position;
+            targetPos.y += 1;
+            while (true)
+            {
+                LookAt_Yaxis(targetPos);
+                transform.Translate(Vector3.forward * Time.deltaTime * MOVE_SPEED * 2);
+
+                float sqrMagnitude = (transform.position - targetPos).sqrMagnitude;
+                if (sqrMagnitude < 0.5f)
+                {
+                    break;
+                }
+                yield return null;
+            }
+        }
+        animator.SetBool("Run Forward", false);
+    }
+
+
+    void PutPerfectlyOnNavMesh()
     {
         NavMeshHit closestHit;
 

@@ -5,27 +5,34 @@ using UnityEngine.UI;
 
 public class PathFindingManager : MonoBehaviour
 {
+    public static PathFindingManager S;
+
+    public GameObject ground;
     public GameObject startPosCube;
     public GameObject targetPosCube;
     public GameObject obstacle;
     public Slider slider;
+    public Enemy controlUnit;
 
     Node startNode;
     Node targetNode;
 
     bool isStartPosSelect;
 
-    Stack<Node> shortestPath;
-
+    Node[] nodeArray;   // all of the nodes currently in map
     List<Node> visitedNodes;
     PriorityQueue<Node> priorityQueue;
+    Stack<Node> shortestPath;
 
     float searchSpeed;
-
     bool searchWithAstar;
+
+    Enemy requestFrom;
 
     private void Awake()
     {
+        S = this;
+
         shortestPath = new Stack<Node>();
         visitedNodes = new List<Node>();
         priorityQueue = new PriorityQueue<Node>();
@@ -36,6 +43,7 @@ public class PathFindingManager : MonoBehaviour
 
         searchWithAstar = false;
         searchSpeed = 0;
+        requestFrom = null;
     }
 
     // Start is called before the first frame update
@@ -43,6 +51,7 @@ public class PathFindingManager : MonoBehaviour
     {
         startPosCube.SetActive(false);
         targetPosCube.SetActive(false);
+        nodeArray = ground.GetComponentsInChildren<Node>();
     }
 
     // Update is called once per frame
@@ -82,10 +91,12 @@ public class PathFindingManager : MonoBehaviour
                         targetPosCube.SetActive(false);
 
                         Vector3 pos = node.transform.position;
-                        pos.y += 2;
+                        pos.y += 1;
                         startPosCube.transform.position = pos;
                         isStartPosSelect = false;
                         InitVisitedNodes();
+
+                        controlUnit.transform.position = pos;
                     }
                     else
                     {
@@ -94,15 +105,13 @@ public class PathFindingManager : MonoBehaviour
                         targetPosCube.SetActive(true);
 
                         Vector3 pos = node.transform.position;
-                        pos.y += 2;
+                        pos.y += 1;
                         targetPosCube.transform.position = pos;
 
                         isStartPosSelect = true;
 
-                        if (searchWithAstar)
-                            StartCoroutine("FindPath_Astar");
-                        else
-                            StartCoroutine("FindPath_Dijkstra");
+                        controlUnit.SetDestination(pos);
+                        FindPath(controlUnit, targetNode);
                     }
                 }
             }
@@ -132,6 +141,7 @@ public class PathFindingManager : MonoBehaviour
         if (targetFound)
         {
             BacktrackRecursive(targetNode);
+            requestFrom.SetPath(shortestPath);
         }
         else
         {
@@ -200,6 +210,7 @@ public class PathFindingManager : MonoBehaviour
         if (targetFound)
         {
             BacktrackRecursive(targetNode);
+            requestFrom.SetPath(shortestPath);
         }
         else
         {
@@ -314,5 +325,33 @@ public class PathFindingManager : MonoBehaviour
     public void OnValueChanged()
     {
         searchSpeed = slider.value;
+    }
+
+    public void FindPath(Enemy _requestFrom, Node _targetNode)
+    {
+        requestFrom = _requestFrom;
+
+        float closestDistSoFar = float.MaxValue;
+        Node closestNodeSoFar = null;
+
+        Vector3 requestPos = requestFrom.transform.position;
+
+        foreach(var node in nodeArray)
+        {
+            float dist = (requestPos - node.transform.position).sqrMagnitude;
+            if(dist < closestDistSoFar)
+            {
+                closestDistSoFar = dist;
+                closestNodeSoFar = node;
+            }
+        }
+
+        startNode = closestNodeSoFar;
+        targetNode = _targetNode;
+
+        if (searchWithAstar)
+            StartCoroutine("FindPath_Astar");
+        else
+            StartCoroutine("FindPath_Dijkstra");
     }
 }

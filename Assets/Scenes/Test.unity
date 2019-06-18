@@ -1011,7 +1011,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1342248290}
-        m_MethodName: DoItWithAstar
+        m_MethodName: SearchWithAstar
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1256,7 +1256,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1342248290}
-        m_MethodName: DoItWithAstar
+        m_MethodName: SearchWithAstar
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2213,10 +2213,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365f21d7d0227cb43be65a72073d0683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ground: {fileID: 1741835913}
   startPosCube: {fileID: 1044224959}
   targetPosCube: {fileID: 1957605176}
   obstacle: {fileID: 872577799}
   slider: {fileID: 306745406}
+  controlUnit: {fileID: 4914768004734322510}
 --- !u!4 &1342248291
 Transform:
   m_ObjectHideFlags: 0
@@ -5220,6 +5222,7 @@ MonoBehaviour:
   cur_moveSpeed: 0
   cur_dotDamge: 0
   enemyType: 0
+  testingPathFinding: 1
 --- !u!1001 &7531600359093033302
 PrefabInstance:
   m_ObjectHideFlags: 0
