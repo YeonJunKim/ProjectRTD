@@ -17,7 +17,7 @@ public class Enemy : BaseGameEntity
     Healthbar healthbar;
     bool poisonLock;
 
-    Stack<Node> pathToGO;
+    List<Node> pathToGO;
 
     public bool testingPathFinding;
 
@@ -26,7 +26,8 @@ public class Enemy : BaseGameEntity
         base.Awake();
         animator = GetComponentInChildren<Animator>();
         healthbar = GetComponentInChildren<Healthbar>();
-        pathToGO = new Stack<Node>();
+        pathToGO = new List<Node>();
+
     }
 
     protected override void Update()
@@ -88,14 +89,16 @@ public class Enemy : BaseGameEntity
         //navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
         //navMeshAgent.SetDestination(destination);
         //StartWalkingAnimation();
-
         // handmade A* algorithm version
         destination = pos;
         StartWalkingAnimation();
+        if(!testingPathFinding)
+            pathToGO = PathManager.S.GetPath();
+        StartCoroutine("StartMove");
     }
 
     // handmade A* algorithm version
-    public void SetPath(Stack<Node> path)
+    public void SetPath(List<Node> path)
     {
         pathToGO = path;
         StartWalkingAnimation();
@@ -104,14 +107,19 @@ public class Enemy : BaseGameEntity
 
     IEnumerator StartMove()
     {
-        while(pathToGO.Count != 0)
+        for (int i = 0; i < pathToGO.Count; i++)
         {
-            Vector3 targetPos = pathToGO.Pop().transform.position;
-            targetPos.y += 1;
+            Vector3 targetPos = pathToGO[i].transform.position;
+            targetPos.y += 0.5f;
+            if (testingPathFinding)
+                targetPos.y += 0.5f;
             while (true)
             {
                 LookAt_Yaxis(targetPos);
-                transform.Translate(Vector3.forward * Time.deltaTime * MOVE_SPEED * 2);
+                if (testingPathFinding)
+                    transform.Translate(Vector3.forward * Time.deltaTime * MOVE_SPEED * 2);
+                else
+                    transform.Translate(Vector3.forward * Time.deltaTime * MOVE_SPEED);
 
                 float sqrMagnitude = (transform.position - targetPos).sqrMagnitude;
                 if (sqrMagnitude < 0.5f)

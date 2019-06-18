@@ -3,32 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PathFindingManager : MonoBehaviour
+public class PathManager : MonoBehaviour
 {
-    public static PathFindingManager S;
+    public static PathManager S;
 
     public GameObject ground;
-    public GameObject startPosCube;
-    public GameObject targetPosCube;
-    public GameObject obstacle;
-    public Slider slider;
-    public Enemy controlUnit;
 
-    Node startNode;
-    Node targetNode;
-
-    bool isStartPosSelect;
+    public Node startNode;
+    public Node targetNode;
 
     Node[] nodeArray;   // all of the nodes currently in map
     List<Node> visitedNodes;
     PriorityQueue<Node> priorityQueue;
     Stack<Node> shortestPath;
     List<Node> constrainPath;
-
-    float searchSpeed;
-    bool searchWithAstar;
-
-    Enemy requestFrom;
+    Node previousNode;
 
     private void Awake()
     {
@@ -38,87 +27,15 @@ public class PathFindingManager : MonoBehaviour
         visitedNodes = new List<Node>();
         priorityQueue = new PriorityQueue<Node>();
         constrainPath = new List<Node>();
-
-        startNode = null;
-        targetNode = null;
-        isStartPosSelect = true;
-
-        searchWithAstar = false;
-        searchSpeed = 0;
-        requestFrom = null;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        startPosCube.SetActive(false);
-        targetPosCube.SetActive(false);
         nodeArray = ground.GetComponentsInChildren<Node>();
+        Invoke("FindPath", 1);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetMouseButton(1))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 100))    // only hit Towers and Enemys
-            {
-                if (hit.transform.tag == "Node")
-                {
-                    Vector3 pos = hit.transform.position;
-                    pos.y += 1;
-                    obstacle.transform.position = pos;
-                }
-            }
-        }
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 100))    // only hit Towers and Enemys
-            {
-                if (hit.transform.tag == "Node")
-                {
-                    Node node = hit.transform.GetComponent<Node>();
-                    if (isStartPosSelect)
-                    {
-                        StopAllCoroutines();
-
-                        startNode = node;
-
-                        startPosCube.SetActive(true);
-                        targetPosCube.SetActive(false);
-
-                        Vector3 pos = node.transform.position;
-                        pos.y += 1;
-                        startPosCube.transform.position = pos;
-                        isStartPosSelect = false;
-                        InitVisitedNodes();
-
-                        controlUnit.transform.position = pos;
-                    }
-                    else
-                    {
-                        targetNode = node;
-
-                        targetPosCube.SetActive(true);
-
-                        Vector3 pos = node.transform.position;
-                        pos.y += 1;
-                        targetPosCube.transform.position = pos;
-
-                        isStartPosSelect = true;
-
-                        //controlUnit.SetDestination(pos);
-                        FindPath(controlUnit, targetNode);
-                    }
-                }
-            }
-        }
-    }
 
     IEnumerator FindPath_Dijkstra()
     {
@@ -130,14 +47,14 @@ public class PathFindingManager : MonoBehaviour
         priorityQueue.Enqueue(startNode);
 
         bool targetFound = false;
-        while(true)
+        while (true)
         {
             targetFound = SearchOneStep_Dijkstra();
-            if(targetFound)
+            if (targetFound)
             {
                 break;
             }
-            yield return new WaitForSeconds(searchSpeed);
+            yield return null;
         }
 
         if (targetFound)
@@ -148,13 +65,6 @@ public class PathFindingManager : MonoBehaviour
         {
             Debug.LogError("Path was not Found");
         }
-
-        while (shortestPath.Count != 0)
-        {
-            constrainPath.Add(shortestPath.Pop());
-        }
-
-        requestFrom.SetPath(constrainPath);
     }
 
     bool SearchOneStep_Dijkstra()
@@ -197,6 +107,8 @@ public class PathFindingManager : MonoBehaviour
 
     IEnumerator FindPath_Astar()
     {
+        Debug.Log("Start Astar");
+
         shortestPath.Clear();
         priorityQueue.Clear();
         visitedNodes.Clear();
@@ -212,7 +124,7 @@ public class PathFindingManager : MonoBehaviour
             {
                 break;
             }
-            yield return new WaitForSeconds(searchSpeed);
+            yield return null;
         }
 
         if (targetFound)
@@ -224,12 +136,10 @@ public class PathFindingManager : MonoBehaviour
             Debug.LogError("Path was not Found");
         }
 
-        while (shortestPath.Count != 0)
+        while(shortestPath.Count != 0)
         {
             constrainPath.Add(shortestPath.Pop());
         }
-
-        requestFrom.SetPath(constrainPath);
     }
 
     bool SearchOneStep_Astar()
@@ -239,6 +149,9 @@ public class PathFindingManager : MonoBehaviour
         for (int i = 0; i < priorityQueue.Count(); i++)
         {
             Node nodeToSearch = priorityQueue.Dequeue();
+
+            visitedNodes.Add(nodeToSearch);
+            nodeToSearch.SetVisited(true);
             targetFound = SearchNeighborNodes_Astar(nodeToSearch);
             if (targetFound)
             {
@@ -263,10 +176,7 @@ public class PathFindingManager : MonoBehaviour
                 {
                     closestDistSoFar = neighborNode.distanceTraveled;
                     closestNodeSoFar = neighborNode;
-
                     neighborNode.from = node;
-                    visitedNodes.Add(neighborNode);
-                    neighborNode.SetVisited(true);
                 }
 
                 if (neighborNode == targetNode)
@@ -276,10 +186,12 @@ public class PathFindingManager : MonoBehaviour
             }
         }
 
-        if(closestNodeSoFar != null)
+        if (closestNodeSoFar != null)
         {
             priorityQueue.Enqueue(closestNodeSoFar);
         }
+
+        Debug.Log("fail");
 
         return false;
     }
@@ -310,7 +222,7 @@ public class PathFindingManager : MonoBehaviour
 
     float GetDistance(Node node1, Node node2)
     {
-        if(node1.transform.position.x == node2.transform.position.x 
+        if (node1.transform.position.x == node2.transform.position.x
             || node1.transform.position.z == node2.transform.position.z)
         {
             return 1;
@@ -330,43 +242,18 @@ public class PathFindingManager : MonoBehaviour
 
         return dist;
     }
+    
 
-    public void SearchWithAstar(bool toggle)
+    public void FindPath()
     {
-        searchWithAstar = toggle;
+        InitVisitedNodes();
+        StartCoroutine("FindPath_Astar");
     }
 
-    public void OnValueChanged()
+    public List<Node> GetPath()
     {
-        searchSpeed = slider.value;
-    }
-
-    public void FindPath(Enemy _requestFrom, Node _targetNode)
-    {
-        constrainPath.Clear();
-        requestFrom = _requestFrom;
-
-        float closestDistSoFar = float.MaxValue;
-        Node closestNodeSoFar = null;
-
-        Vector3 requestPos = requestFrom.transform.position;
-
-        foreach(var node in nodeArray)
-        {
-            float dist = (requestPos - node.transform.position).sqrMagnitude;
-            if(dist < closestDistSoFar)
-            {
-                closestDistSoFar = dist;
-                closestNodeSoFar = node;
-            }
-        }
-
-        startNode = closestNodeSoFar;
-        targetNode = _targetNode;
-
-        if (searchWithAstar)
-            StartCoroutine("FindPath_Astar");
-        else
-            StartCoroutine("FindPath_Dijkstra");
+        List<Node> list = new List<Node>();
+        list = constrainPath;
+        return list;
     }
 }

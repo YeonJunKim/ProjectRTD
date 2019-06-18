@@ -15,13 +15,20 @@ public class Node : MonoBehaviour, IComparable<Node>
     public Node from;
     public float distanceTraveled;
 
-
     private void Awake()
     {
         neighborNodes = new List<Node>();
         touchingObstacles = new List<GameObject>();
         isVisited = false;
         isWalkable = true;
+    }
+
+    private void Start()
+    {
+        if (PathManager.S != null)
+        {
+            //nodeSphere.gameObject.SetActive(false);
+        }
     }
 
     public void Init()
@@ -42,6 +49,13 @@ public class Node : MonoBehaviour, IComparable<Node>
             touchingObstacles.Add(other.gameObject);
             CheckIsWalkable();
         }
+        else if(other.tag == "Ground")  // for game mode
+        {
+            if ((transform.position - other.transform.position).sqrMagnitude < 0.3f)
+            {
+                isWalkable = false;
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -55,6 +69,10 @@ public class Node : MonoBehaviour, IComparable<Node>
         {
             touchingObstacles.Remove(other.gameObject);
             CheckIsWalkable();
+        }
+        else if (other.tag == "Ground")
+        {
+
         }
     }
 

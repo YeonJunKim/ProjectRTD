@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviour
             {
                 Enemy enemyN = EntityManager.S.GetEntity((EnemyType)nextEnemyType) as Enemy;
                 enemyN.transform.position = spawnPoint_N.position;
-                enemyN.transform.Translate(0, 0.5f, 0); // for enemy to be on NavMesh
+                //enemyN.transform.Translate(0, 0.5f, 0); // for enemy to be on NavMesh
                 enemyN.SetDestination(spawnPoint_S.position);
 
                 nextBossStage += 6;
@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
                 {
                     Enemy enemyN = EntityManager.S.GetEntity((EnemyType)nextEnemyType) as Enemy;
                     enemyN.transform.position = spawnPoint_N.position;
-                    enemyN.transform.Translate(0, 0.5f, 0); // for enemy to be on NavMesh
+                    //enemyN.transform.Translate(0, 0.5f, 0); // for enemy to be on NavMesh
                     enemyN.SetDestination(spawnPoint_S.position);
 
                     countSpawn++;
