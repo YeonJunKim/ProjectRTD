@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PathFindingManager : MonoBehaviour
 {
     public GameObject startPosCube;
     public GameObject targetPosCube;
+    public GameObject obstacle;
+    public Slider slider;
 
     Node startNode;
     Node targetNode;
@@ -15,20 +18,24 @@ public class PathFindingManager : MonoBehaviour
     Stack<Node> shortestPath;
 
     List<Node> visitedNodes;
+    PriorityQueue<Node> priorityQueue;
 
-    List<Node> nextStepCheckNodes;
-    List<Node> tempNextStepCheckNodes;
-    const float stepSpeed = 0.2f;
+    float searchSpeed;
+
+    bool searchWithAstar;
 
     private void Awake()
     {
         shortestPath = new Stack<Node>();
         visitedNodes = new List<Node>();
-        nextStepCheckNodes = new List<Node>();
-        tempNextStepCheckNodes = new List<Node>();
+        priorityQueue = new PriorityQueue<Node>();
+
         startNode = null;
         targetNode = null;
         isStartPosSelect = true;
+
+        searchWithAstar = false;
+        searchSpeed = 0;
     }
 
     // Start is called before the first frame update
@@ -41,6 +48,21 @@ public class PathFindingManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetMouseButton(1))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, 100))    // only hit Towers and Enemys
+            {
+                if (hit.transform.tag == "Node")
+                {
+                    Vector3 pos = hit.transform.position;
+                    pos.y += 1;
+                    obstacle.transform.position = pos;
+                }
+            }
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -77,7 +99,10 @@ public class PathFindingManager : MonoBehaviour
 
                         isStartPosSelect = true;
 
-                        StartCoroutine("FindPath_Astar");
+                        if (searchWithAstar)
+                            StartCoroutine("FindPath_Astar");
+                        else
+                            StartCoroutine("FindPath_Dijkstra");
                     }
                 }
             }
@@ -87,23 +112,21 @@ public class PathFindingManager : MonoBehaviour
     IEnumerator FindPath_Dijkstra()
     {
         shortestPath.Clear();
-        nextStepCheckNodes.Clear();
-        tempNextStepCheckNodes.Clear();
+        priorityQueue.Clear();
         visitedNodes.Clear();
 
-        nextStepCheckNodes.Add(startNode);
-        visitedNodes.Add(startNode);
+        startNode.distanceTraveled = 0;
+        priorityQueue.Enqueue(startNode);
 
         bool targetFound = false;
         while(true)
         {
-            targetFound = CheckOneStep_Dijkstra();
+            targetFound = SearchOneStep_Dijkstra();
             if(targetFound)
             {
                 break;
             }
-            Debug.Log("Finding Path.. Dijkstra");
-            yield return new WaitForSeconds(stepSpeed);
+            yield return new WaitForSeconds(searchSpeed);
         }
 
         if (targetFound)
@@ -116,47 +139,40 @@ public class PathFindingManager : MonoBehaviour
         }
     }
 
-    bool CheckOneStep_Dijkstra()
+    bool SearchOneStep_Dijkstra()
     {
-        tempNextStepCheckNodes.Clear();
-        foreach (var node in nextStepCheckNodes)
+        bool targetFound = false;
+
+        for (int i = 0; i < priorityQueue.Count(); i++)
         {
-           bool targetFound = CheckNeighborNodes_Dijkstra(node);
-           if(targetFound)
+            Node nodeToSearch = priorityQueue.Dequeue();
+            targetFound = SearchNeighborNodes_Dijkstra(nodeToSearch);
+            if (targetFound)
             {
                 return true;
             }
         }
-
-        nextStepCheckNodes.Clear();
-        foreach (var node in tempNextStepCheckNodes)
-        {
-            nextStepCheckNodes.Add(node);
-        }
-
         return false;
     }
 
-    bool CheckNeighborNodes_Dijkstra(Node node)
+    bool SearchNeighborNodes_Dijkstra(Node node)
     {
-        foreach (var neighborNode in node.neighbor_none_diagonal)
+        foreach (var neighborNode in node.neighborNodes)
         {
-            if(neighborNode.isWalkable && !neighborNode.isVisited)
+            if (neighborNode.isWalkable && !neighborNode.isVisited)
             {
-                neighborNode.SetVisited(true, node);
+                neighborNode.distanceTraveled = node.distanceTraveled + GetDistance(node, neighborNode);
+                neighborNode.from = node;
+                priorityQueue.Enqueue(neighborNode);
                 visitedNodes.Add(neighborNode);
+                neighborNode.SetVisited(true);
 
                 if (neighborNode == targetNode)
                 {
                     return true;
                 }
-                else
-                {
-                    tempNextStepCheckNodes.Add(neighborNode);
-                }
             }
         }
-
         return false;
     }
 
@@ -164,23 +180,21 @@ public class PathFindingManager : MonoBehaviour
     IEnumerator FindPath_Astar()
     {
         shortestPath.Clear();
-        nextStepCheckNodes.Clear();
-        tempNextStepCheckNodes.Clear();
+        priorityQueue.Clear();
         visitedNodes.Clear();
 
-        nextStepCheckNodes.Add(startNode);
-        visitedNodes.Add(startNode);
+        startNode.distanceTraveled = 0;
+        priorityQueue.Enqueue(startNode);
 
         bool targetFound = false;
         while (true)
         {
-            targetFound = CheckOneStep_Astar();
+            targetFound = SearchOneStep_Astar();
             if (targetFound)
             {
                 break;
             }
-            Debug.Log("Finding Path.. Astar");
-            yield return new WaitForSeconds(stepSpeed);
+            yield return new WaitForSeconds(searchSpeed);
         }
 
         if (targetFound)
@@ -193,58 +207,54 @@ public class PathFindingManager : MonoBehaviour
         }
     }
 
-    bool CheckOneStep_Astar()
+    bool SearchOneStep_Astar()
     {
-        tempNextStepCheckNodes.Clear();
-        foreach (var node in nextStepCheckNodes)
+        bool targetFound = false;
+
+        for (int i = 0; i < priorityQueue.Count(); i++)
         {
-            bool targetFound = CheckNeighborNodes_Astar(node);
+            Node nodeToSearch = priorityQueue.Dequeue();
+            targetFound = SearchNeighborNodes_Astar(nodeToSearch);
             if (targetFound)
             {
                 return true;
             }
         }
-
-        nextStepCheckNodes.Clear();
-        foreach (var node in tempNextStepCheckNodes)
-        {
-            nextStepCheckNodes.Add(node);
-        }
-
         return false;
     }
 
-    bool CheckNeighborNodes_Astar(Node node)
+    bool SearchNeighborNodes_Astar(Node node)
     {
-        float closestDist = float.MaxValue;
-        Node closestNodeToTarget = null;
+        float closestDistSoFar = float.MaxValue;
+        Node closestNodeSoFar = null;
 
-        foreach (var neighborNode in node.neighbor_none_diagonal)
+        foreach (var neighborNode in node.neighborNodes)
         {
             if (neighborNode.isWalkable && !neighborNode.isVisited)
             {
-                neighborNode.SetVisited(true, node);
-                visitedNodes.Add(neighborNode);
+                neighborNode.distanceTraveled = node.distanceTraveled + GetDistance(node, neighborNode) + GetDistanceFromTarget(neighborNode);
+
+                if (neighborNode.distanceTraveled < closestDistSoFar)
+                {
+                    closestDistSoFar = neighborNode.distanceTraveled;
+                    closestNodeSoFar = neighborNode;
+
+                    neighborNode.from = node;
+                    visitedNodes.Add(neighborNode);
+                    neighborNode.SetVisited(true);
+                }
 
                 if (neighborNode == targetNode)
                 {
                     return true;
                 }
-                else
-                {
-                    float x = Mathf.Abs(neighborNode.transform.position.x - targetNode.transform.position.x);
-                    float z = Mathf.Abs(neighborNode.transform.position.z - targetNode.transform.position.z);
-                    float dist = x + z;
-                    if(dist < closestDist)
-                    {
-                        closestDist = dist;
-                        closestNodeToTarget = neighborNode;
-                    }
-                }
             }
         }
 
-        tempNextStepCheckNodes.Add(closestNodeToTarget);
+        if(closestNodeSoFar != null)
+        {
+            priorityQueue.Enqueue(closestNodeSoFar);
+        }
 
         return false;
     }
@@ -266,10 +276,43 @@ public class PathFindingManager : MonoBehaviour
 
     void InitVisitedNodes()
     {
-        foreach(var node in visitedNodes)
+        foreach (var node in visitedNodes)
         {
             node.Init();
         }
         visitedNodes.Clear();
+    }
+
+    float GetDistance(Node node1, Node node2)
+    {
+        if(node1.transform.position.x == node2.transform.position.x 
+            || node1.transform.position.z == node2.transform.position.z)
+        {
+            return 1;
+        }
+        else
+        {
+            return 1.4f;
+        }
+    }
+
+    float GetDistanceFromTarget(Node node)
+    {
+        float dist;
+        float x = Mathf.Abs(targetNode.transform.position.x - node.transform.position.x) / 2;
+        float z = Mathf.Abs(targetNode.transform.position.z - node.transform.position.z) / 2;
+        dist = x + z;
+
+        return dist;
+    }
+
+    public void SearchWithAstar(bool toggle)
+    {
+        searchWithAstar = toggle;
+    }
+
+    public void OnValueChanged()
+    {
+        searchSpeed = slider.value;
     }
 }
