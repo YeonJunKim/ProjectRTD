@@ -35,6 +35,7 @@ public class Node : MonoBehaviour, IComparable<Node>
     {
         SetVisited(false);
         distanceTraveled = 0;
+        CheckIsWalkable();
     }
 
     private void OnTriggerEnter(Collider other)

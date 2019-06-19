@@ -12,4 +12,10 @@ public class IntroManager : MonoBehaviour
         clickSound.Play();
         SceneManager.LoadScene(1);  // GameScene
     }
+
+    public void OnPath()
+    {
+        clickSound.Play();
+        SceneManager.LoadScene(2);  // GameScene
+    }
 }
