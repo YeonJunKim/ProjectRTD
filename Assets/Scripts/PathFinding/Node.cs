@@ -23,14 +23,6 @@ public class Node : MonoBehaviour, IComparable<Node>
         isWalkable = true;
     }
 
-    private void Start()
-    {
-        if (PathManager.S != null)
-        {
-            //nodeSphere.gameObject.SetActive(false);
-        }
-    }
-
     public void Init()
     {
         SetVisited(false);
@@ -55,6 +47,7 @@ public class Node : MonoBehaviour, IComparable<Node>
             if ((transform.position - other.transform.position).sqrMagnitude < 0.3f)
             {
                 isWalkable = false;
+                nodeSphere.material.color = Color.blue;
             }
         }
     }
