@@ -15,10 +15,7 @@ public class BaseGameEntity : MonoBehaviour
     protected float HP, DAMAGE, ARMOR, ATTK_RANGE, ATTK_SPEED, MOVE_SPEED;
 
     [SerializeField]
-    protected float cur_hp, cur_damage, cur_armor, cur_attkRange, cur_attkSpeed,
-        cur_moveSpeed, cur_dotDamge;
-
-    protected  Buffer cur_dotBuffer;
+    protected float cur_hp, cur_damage, cur_armor, cur_attkRange, cur_attkSpeed, cur_moveSpeed;
 
     List<Buffer> curBuffers;
 
@@ -118,7 +115,7 @@ public class BaseGameEntity : MonoBehaviour
         float sAttkRange = 1;
         float sAttkSpeed = 1;
         float sMoveSpeed = 1;
-        float sDotDamge = 0;
+
         foreach (var buf in curBuffers)
         {
             sDamage = Mathf.Max(sDamage, buf.damage);           // buf should be Max value
@@ -126,11 +123,7 @@ public class BaseGameEntity : MonoBehaviour
             sAttkRange = Mathf.Max(sAttkRange, buf.attkRange);
             sAttkSpeed = Mathf.Max(sAttkSpeed, buf.attkSpeed);
             sMoveSpeed = Mathf.Min(sMoveSpeed, buf.moveSpeed);     // min value will make it faster 
-            if (sDotDamge < buf.dotDamge)
-                cur_dotBuffer = buf;
-            sDotDamge = Mathf.Max(sDotDamge, buf.dotDamge);
         }
-        cur_dotDamge = sDotDamge;
         cur_damage *= sDamage;
         cur_moveSpeed *= sMoveSpeed;
         cur_armor *= sArmor;
@@ -169,12 +162,10 @@ public class BaseGameEntity : MonoBehaviour
         get { return DAMAGE; }
     }
 
-
     public float _HP
     {
         get { return HP; }
     }
-
 
     public float _ARMOR
     {

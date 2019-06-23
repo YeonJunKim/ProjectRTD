@@ -8,7 +8,7 @@ public class Buffer
 {
     public bool isAlive;
     public float lifeTime;
-    public float damage, armor, attkRange, attkSpeed, moveSpeed,dotDamge;    // this will be multiplied
+    public float damage, armor, attkRange, attkSpeed, moveSpeed;    // this will be multiplied
 
     public float cur_LifeTime;
 
@@ -28,8 +28,6 @@ public class Buffer
             attkSpeed = 1;
         if (Mathf.Approximately(moveSpeed, 0))
             moveSpeed = 1;
-
-        dotDamge = 0;
     }
 
     public void Update()

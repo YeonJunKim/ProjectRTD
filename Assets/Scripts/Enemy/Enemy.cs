@@ -9,17 +9,13 @@ public class Enemy : BaseGameEntity
 
     Animator animator;
 
-    NavMeshAgent navMeshAgent;
+    //NavMeshAgent navMeshAgent;
     Vector3 destination;
     const float angularSpeed = 500;    // make it fast enough to turn quickly
     const float acceleration = 30;     // make it fast enough to turn quickly
 
     Healthbar healthbar;
-    bool poisonLock;
-
     List<Node> pathToGO;
-
-    public bool testingPathFinding;
 
     protected override void Awake()
     {
@@ -32,16 +28,13 @@ public class Enemy : BaseGameEntity
 
     protected override void Update()
     {
-        if(!testingPathFinding)
-        {
-            base.Update();
+        base.Update();
 
-            float sqrDist = Vector3.SqrMagnitude(transform.position - destination);
-            if (sqrDist < 0.5f)
-            {
-                GameManager.S.DecreaseLife();
-                OnDeath();
-            }
+        float sqrDist = Vector3.SqrMagnitude(transform.position - destination);
+        if (sqrDist < 0.5f)
+        {
+            GameManager.S.DecreaseLife();
+            OnDeath();
         }
     }
 
@@ -49,14 +42,13 @@ public class Enemy : BaseGameEntity
     {
         base.OnCreate();
         healthbar.UpdateHealthbar(HP, cur_hp);
-        poisonLock = true;
     }
 
     public override void OnDeath()
     {
         base.OnDeath();
         EntityManager.S.OnEnemyDeath(this);
-        Destroy(navMeshAgent);
+        //Destroy(navMeshAgent);
 
         if(enemyType == EnemyType.Boss_1 || enemyType == EnemyType.Boss_2 || enemyType == EnemyType.Boss_3)
             GameManager.S.IncreaseMoneyBossStageLevel();
@@ -89,11 +81,11 @@ public class Enemy : BaseGameEntity
         //navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
         //navMeshAgent.SetDestination(destination);
         //StartWalkingAnimation();
+
         // handmade A* algorithm version
         destination = pos;
         StartWalkingAnimation();
-        if(!testingPathFinding)
-            pathToGO = PathManager.S.GetPath();
+        pathToGO = PathManager.S.GetPath();
         StartCoroutine("StartMove");
     }
 
@@ -111,15 +103,11 @@ public class Enemy : BaseGameEntity
         {
             Vector3 targetPos = pathToGO[i].transform.position;
             targetPos.y += 0.5f;
-            if (testingPathFinding)
-                targetPos.y += 0.5f;
+
             while (true)
             {
                 LookAt_Yaxis(targetPos);
-                if (testingPathFinding)
-                    transform.Translate(Vector3.forward * Time.deltaTime * MOVE_SPEED * 2);
-                else
-                    transform.Translate(Vector3.forward * Time.deltaTime * MOVE_SPEED);
+                transform.Translate(Vector3.forward * Time.deltaTime * MOVE_SPEED);
 
                 float sqrMagnitude = (transform.position - targetPos).sqrMagnitude;
                 if (sqrMagnitude < 0.5f)
@@ -129,63 +117,38 @@ public class Enemy : BaseGameEntity
                 yield return null;
             }
         }
-        animator.SetBool("Run Forward", false);
     }
 
 
-    void PutPerfectlyOnNavMesh()
-    {
-        NavMeshHit closestHit;
+    // navMeshAgent Version
+    //void PutPerfectlyOnNavMesh()
+    //{
+    //    NavMeshHit closestHit;
 
-        if (NavMesh.SamplePosition(gameObject.transform.position, out closestHit, 500f, 1))
-            gameObject.transform.position = closestHit.position;
-        else
-            Debug.LogError("Could not find position on NavMesh!");
+    //    if (NavMesh.SamplePosition(gameObject.transform.position, out closestHit, 500f, 1))
+    //        gameObject.transform.position = closestHit.position;
+    //    else
+    //        Debug.LogError("Could not find position on NavMesh!");
 
-        navMeshAgent = gameObject.AddComponent<NavMeshAgent>();
-        navMeshAgent.speed = MOVE_SPEED;
-        navMeshAgent.angularSpeed = angularSpeed;    // make it fast enough to turn quickly
-        navMeshAgent.acceleration = acceleration;    // make it fast enough to turn quickly
-    }
+    //    navMeshAgent = gameObject.AddComponent<NavMeshAgent>();
+    //    navMeshAgent.speed = MOVE_SPEED;
+    //    navMeshAgent.angularSpeed = angularSpeed;    // make it fast enough to turn quickly
+    //    navMeshAgent.acceleration = acceleration;    // make it fast enough to turn quickly
+    //}
 
     public override void RegisterBuffer(Buffer buffer)
     {
         base.RegisterBuffer(buffer);
 
-        navMeshAgent.speed = cur_moveSpeed;
-        if(cur_dotDamge > 0.0f&&poisonLock)
-        {
-            float curdotDamge = cur_dotDamge;
-            StartCoroutine(DotDamage(Mathf.RoundToInt(cur_dotBuffer.lifeTime), curdotDamge));
-        }
+        //navMeshAgent.speed = cur_moveSpeed;
     }
 
     protected override void DeregisterBuffer(Buffer buffer)
     {
         base.DeregisterBuffer(buffer);
-        if (cur_dotDamge > 0.0f && poisonLock)
-        {
-            float curdotDamge = cur_dotDamge;
-            StartCoroutine(DotDamage(Mathf.RoundToInt(cur_dotBuffer.lifeTime), curdotDamge));
-        }
-        navMeshAgent.speed = cur_moveSpeed;
+        //navMeshAgent.speed = cur_moveSpeed;
     }
-    
-    IEnumerator DotDamage(int repeatTime,float damage)
-    {
-        poisonLock = false;
 
-        DecreaseHp(damage);
-        yield return new WaitForSeconds(1f);
-        poisonLock = true;
-
-        if (repeatTime > 0 && cur_hp > cur_dotDamge)
-        {
-            repeatTime--;
-            StartCoroutine (DotDamage(repeatTime, damage));
-        }
-
-    }
 
     void StartWalkingAnimation()
     {

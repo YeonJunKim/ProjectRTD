@@ -33,7 +33,7 @@ public class ControlUnit : MonoBehaviour
             while (true)
             {
                 transform.LookAt(targetPos);
-                transform.Translate(Vector3.forward * Time.deltaTime * 10);
+                transform.Translate(Vector3.forward * Time.deltaTime * 20);
 
                 float sqrMagnitude = (transform.position - targetPos).sqrMagnitude;
                 if (sqrMagnitude < 0.5f)

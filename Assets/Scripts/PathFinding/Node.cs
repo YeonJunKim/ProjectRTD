@@ -15,34 +15,41 @@ public class Node : MonoBehaviour, IComparable<Node>
     public Node from;
     public float distanceTraveled;
 
+    public bool isDeadEnd;
+
     private void Awake()
     {
         neighborNodes = new List<Node>();
         touchingObstacles = new List<GameObject>();
         isVisited = false;
         isWalkable = true;
+        distanceTraveled = float.MaxValue;
+
+        isDeadEnd = false;
     }
 
     public void Init()
     {
         SetVisited(false);
-        distanceTraveled = 0;
         CheckIsWalkable();
+        distanceTraveled = float.MaxValue;
+
+        isDeadEnd = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Node")
+        if (other.tag == "Node")
         {
             Node node = other.transform.GetComponent<Node>();
             neighborNodes.Add(node);
         }
-        else if(other.tag == "Obstacle")
+        else if (other.tag == "Obstacle")
         {
             touchingObstacles.Add(other.gameObject);
             CheckIsWalkable();
         }
-        else if(other.tag == "Ground")  // for game mode
+        else if (other.tag == "Ground")  // for game mode
         {
             if ((transform.position - other.transform.position).sqrMagnitude < 0.3f)
             {
@@ -93,7 +100,7 @@ public class Node : MonoBehaviour, IComparable<Node>
 
     void CheckIsWalkable()
     {
-        if(touchingObstacles.Count == 0)
+        if (touchingObstacles.Count == 0)
         {
             isWalkable = true;
             nodeSphere.material.color = Color.white;
