@@ -66,7 +66,8 @@ BaseGameEntity->Projectile->종류별 Projectile
 시작점에서 끝지점까지의 Path를 게임이 시작될 때 딱 한번만 탐색을 하고  
 그 이후로는 탐색을 하지 않고 처음 탐색한 Path를 모든 몬스터가 이용합니다  
 <br /><br /><br />
-3D모델, 이펙트 등은 Unity Asset Store에서 구매한 것입니다
+게임에 사용된 3D모델, 이펙트 등은 Unity Asset Store에서 구매한 것입니다
+유료 Asset이기 때문에 이 Git에는 포함되어 있지 않습니다
 <br /><br />
 이 프로젝트는 기획 1명, 프로그래머 2명이서 개발하였으며  
 개발기간은 약 3주정도 소요되었습니다
