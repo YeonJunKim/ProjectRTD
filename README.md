@@ -70,7 +70,7 @@ BaseGameEntity->Projectile->종류별 Projectile
 유료 Asset이기 때문에 이 Git에는 포함되어 있지 않습니다
 <br /><br />
 이 프로젝트는 기획 1명, 프로그래머 2명이서 개발하였으며  
-개발기간은 약 3주정도 소요되었습니다
+개발기간은 약 5주정도 소요되었습니다
 <br /><br />
 **플레이영상**은 여기서 보실 수 있습니다  
 https://youtu.be/2u4Y_e4_puk
