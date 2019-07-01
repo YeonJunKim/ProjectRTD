@@ -74,3 +74,6 @@ BaseGameEntity->Projectile->종류별 Projectile
 <br /><br />
 **플레이영상**은 여기서 보실 수 있습니다  
 https://youtu.be/2u4Y_e4_puk
+<br /><br />
+**길찾기 알고리즘 데모영상**은 여기서 보실 수 있습니다  
+https://youtu.be/NUEsWmJvvC0
